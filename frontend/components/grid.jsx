@@ -5,8 +5,8 @@ class Grid extends React.Component {
 
 
   renderRow(colId) {
-    const row = Array.from(Array(16).keys());
-    row.map(rowId => <Tile colId={colId} rowId={rowId}
+    let row = Array.from(Array(16).keys());
+    row = row.map(rowId => <Tile colId={colId} rowId={rowId}
                            key={`${rowId}, ${colId}`} />);
     return (
       <div className="grid-row" key={colId}>
@@ -19,7 +19,7 @@ class Grid extends React.Component {
     const cols = Array.from(Array(16).keys());
     const grid = cols.map(colId => this.renderRow(colId));
     return(
-      <div>{grid}</div>
+      <div className="grid-box">{grid}</div>
     );
   }
 }
