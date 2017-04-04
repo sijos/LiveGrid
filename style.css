@@ -29,3 +29,16 @@ body, .grid-box {
   flex-direction: column;
   align-items: center;
 }
+
+.grid-box {
+  width: 60vw;
+}
+
+.grid-row {
+  display: flex;
+  width: 100%;
+}
+
+.tile-off {
+  width: 6.25%;
+}
