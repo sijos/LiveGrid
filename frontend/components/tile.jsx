@@ -7,8 +7,7 @@ class Tile extends React.Component {
     this.toggleStatus = this.toggleStatus.bind(this);
   }
 
-  toggleStatus(e) {
-    e.preventDefault();
+  toggleStatus() {
     const status = this.state.status === "off" ? "on" : "off";
     this.setState({ status });
   }
@@ -16,7 +15,8 @@ class Tile extends React.Component {
   render() {
     return(
       <div className={`tile ${this.state.status}`}
-           onClick={this.toggleStatus}>[ ]
+           onClick={this.toggleStatus}
+           id={[this.props.colId, this.props.rowId]}>[ ]
       </div>
     );
   }
