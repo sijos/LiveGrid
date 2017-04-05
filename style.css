@@ -39,6 +39,14 @@ body, .grid-box {
   width: 100%;
 }
 
-.tile-off {
+.tile {
   width: 6.25%;
+}
+
+.off {
+  background-color: gray;
+}
+
+.on {
+  background-color: limegreen;
 }
