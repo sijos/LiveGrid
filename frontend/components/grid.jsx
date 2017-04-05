@@ -1,5 +1,6 @@
 import React from 'react';
 import Tile from './tile';
+import AudioLoader from './audio_loader';
 
 class Grid extends React.Component {
 
@@ -15,11 +16,21 @@ class Grid extends React.Component {
     );
   }
 
+  // this method for testing only
+  play() {
+    let sound = document.getElementById("aud-0");
+    sound.play();
+  }
+
   render() {
     const rows = Array.from(Array(16).keys());
     const grid = rows.map(colId => this.renderCol(colId));
     return(
-      <div className="grid-box">{grid}</div>
+      <div>
+        <div className="grid-box">{grid}</div>
+        <div className="tile" onClick={this.play.bind(this)}></div>
+        <AudioLoader sampleSet="xylp" />
+      </div>
     );
   }
 }

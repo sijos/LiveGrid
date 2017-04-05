@@ -1,17 +1,18 @@
 import React from 'react';
 
-const audioLoader = ({ sampleSet }) => {
+const AudioLoader = ({ sampleSet }) => {
   let audios = Array.from(Array(16).keys());
-  audios.map(idx => {
+  audios = audios.map(idx => (
     <audio id={`aud-${idx}`}
-          src={`audio/${sampleSet}/${idx}.wav`}
-          preload="auto">
+           key={idx}
+           src={`audio/${sampleSet}/${idx}.wav`}
+           preload="auto">
     </audio>
-  });
+  ));
 
   return (
-    <div> { audios } </div>
+    <div>{ audios }</div>
   );
 };
 
-export default audioLoader;
+export default AudioLoader;
