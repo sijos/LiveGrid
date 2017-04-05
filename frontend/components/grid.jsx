@@ -4,20 +4,20 @@ import Tile from './tile';
 class Grid extends React.Component {
 
 
-  renderRow(colId) {
-    let row = Array.from(Array(16).keys());
-    row = row.map(rowId => <Tile colId={colId} rowId={rowId}
+  renderCol(colId) {
+    let col = Array.from(Array(16).keys());
+    col = col.map(rowId => <Tile colId={colId} rowId={rowId}
                            key={`${rowId}, ${colId}`} />);
     return (
-      <div className="grid-row" key={colId}>
-        { row }
+      <div className="grid-col" key={colId}>
+        { col }
       </div>
     );
   }
 
   render() {
-    const cols = Array.from(Array(16).keys());
-    const grid = cols.map(colId => this.renderRow(colId));
+    const rows = Array.from(Array(16).keys());
+    const grid = rows.map(colId => this.renderCol(colId));
     return(
       <div className="grid-box">{grid}</div>
     );
