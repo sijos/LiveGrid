@@ -3,6 +3,7 @@ import Tile from './tile';
 import AudioLoader from './audio_loader';
 import Synths from './synths';
 import Sequencer from './sequencer';
+import Tone from 'tone';
 
 class Grid extends React.Component {
 
@@ -20,8 +21,13 @@ class Grid extends React.Component {
 
   // this method for testing only
   play() {
-    let sound = document.getElementById("aud-0");
-    sound.play();
+    // let sound = document.getElementById("aud-0");
+    // sound.play();
+    if (Tone.Transport.state === "stopped") {
+      Tone.Transport.start();
+    } else {
+      Tone.Transport.stop();
+    }
   }
 
   render() {
@@ -32,7 +38,7 @@ class Grid extends React.Component {
         <div className="grid-box">{grid}</div>
         <div className="tile" onClick={this.play.bind(this)}></div>
         <AudioLoader sampleSet="xylp" />
-        <Sequencer />
+        <Sequencer grid={grid}/>
         <Synths />
       </div>
     );

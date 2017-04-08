@@ -11,8 +11,13 @@ class Sequencer extends React.Component {
   }
 
   componentDidMount() {
+    console.log(this.props.grid);
     this.createPart();
     Tone.Transport.start();
+  }
+
+  componentWillReceiveProps() {
+    console.log(this.props.grid);
   }
 
   createPart() {
