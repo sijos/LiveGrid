@@ -2,11 +2,13 @@ import React from 'react';
 import Tile from './tile';
 import AudioLoader from './audio_loader';
 import Synths from './synths';
-import Sequencer from './sequencer';
 import Tone from 'tone';
 
 class Grid extends React.Component {
 
+  componentDidMount() {
+    console.log(this.props.part);
+  }
 
   renderCol(colId) {
     let col = Array.from(Array(16).keys());
@@ -38,7 +40,6 @@ class Grid extends React.Component {
         <div className="grid-box">{grid}</div>
         <div className="tile" onClick={this.play.bind(this)}></div>
         <AudioLoader sampleSet="xylp" />
-        <Sequencer grid={grid}/>
         <Synths />
       </div>
     );
