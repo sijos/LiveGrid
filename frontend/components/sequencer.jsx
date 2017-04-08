@@ -1,15 +1,17 @@
 import React from 'react';
 import Tone from 'tone';
 
-const timeColToNotes 
+// const timeColToNotes 
 
 class Sequencer extends React.Component {
   constructor(props) {
     super(props);
     this.state = {};
+    this.createPart = this.createPart.bind(this);
   }
 
   componentDidMount() {
+    this.createPart();
     Tone.Transport.start();
   }
 
@@ -33,7 +35,8 @@ class Sequencer extends React.Component {
       synth.triggerAttackRelease(note, "32n", time);
     }, [[0, []]]);
     part.loop = true;
-    part.loop = "1m";
+    part.loopEnd = "1m";
+    part.start(0);
     part.add(0, ["C3", "D3", "E3", "C4", "G4", "A4"]);
     // this.setState({ part }); // add once state part working
   }
@@ -42,4 +45,10 @@ class Sequencer extends React.Component {
     // add this method to update once state is ready
     // this.state.part.add() this.props.notes
   }
+
+  render() {
+    return <p></p>;
+  }
 }
+
+export default Sequencer;

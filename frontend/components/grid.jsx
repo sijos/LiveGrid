@@ -2,6 +2,7 @@ import React from 'react';
 import Tile from './tile';
 import AudioLoader from './audio_loader';
 import Synths from './synths';
+import Sequencer from './sequencer';
 
 class Grid extends React.Component {
 
@@ -31,6 +32,7 @@ class Grid extends React.Component {
         <div className="grid-box">{grid}</div>
         <div className="tile" onClick={this.play.bind(this)}></div>
         <AudioLoader sampleSet="xylp" />
+        <Sequencer />
         <Synths />
       </div>
     );
