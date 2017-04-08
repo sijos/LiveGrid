@@ -16,7 +16,7 @@ class Tile extends React.Component {
     return(
       <div className={`tile ${this.state.status}`}
            onClick={this.toggleStatus}
-           id={[this.props.colId, this.props.rowId]}>[ ]
+           id={[this.props.colId, this.props.rowId]}>
       </div>
     );
   }
