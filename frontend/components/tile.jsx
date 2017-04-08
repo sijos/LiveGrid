@@ -5,8 +5,21 @@ import { timeStarts, synthNotes } from './constants';
 class Tile extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { status: "off" };
+    this.state = { status: "off", playing: "no" };
     this.toggleStatus = this.toggleStatus.bind(this);
+    this.flashProgress = this.flashProgress.bind(this);
+  }
+
+  componentDidMount() {
+    Tone.Transport.scheduleRepeat(
+      this.flashProgress, "1m", timeStarts[this.props.colId]
+    );
+  }
+
+  flashProgress() {
+    this.setState({ playing: "yes" });
+    // console.log(this.state);
+    setTimeout(() => this.setState({ playing: "no" }), 150);
   }
 
   toggleStatus() {
@@ -26,7 +39,7 @@ class Tile extends React.Component {
   
   render() {
     return(
-      <div className={`tile ${this.state.status}`}
+      <div className={`tile ${this.state.status} ${this.state.playing}`}
            onClick={this.toggleStatus}
            id={[this.props.colId, this.props.rowId]}>
       </div>

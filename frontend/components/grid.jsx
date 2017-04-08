@@ -31,6 +31,7 @@ class Grid extends React.Component {
     } else {
       Tone.Transport.stop();
     }
+    // console.log(this.props.part);
   }
 
   render() {
