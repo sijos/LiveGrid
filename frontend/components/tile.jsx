@@ -1,4 +1,6 @@
 import React from 'react';
+import Tone from 'tone';
+import { timeStarts, synthNotes } from './constants';
 
 class Tile extends React.Component {
   constructor(props) {
@@ -8,7 +10,17 @@ class Tile extends React.Component {
   }
 
   toggleStatus() {
-    const status = this.state.status === "off" ? "on" : "off";
+    let status;
+    
+    const time = timeStarts[this.props.colId];
+    const note = synthNotes[this.props.rowId];
+    if (this.state.status === "off") {
+      status = "on";
+      this.props.part.add(time, note);
+    } else {
+      status = "off";
+      this.props.part.remove(time, note);
+    }
     this.setState({ status });
   }
   

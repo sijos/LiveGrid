@@ -12,8 +12,9 @@ class Grid extends React.Component {
 
   renderCol(colId) {
     let col = Array.from(Array(16).keys());
-    col = col.map(rowId => <Tile colId={colId} rowId={rowId}
-                           key={`${rowId}, ${colId}`} />);
+    col = col.map(rowId => <Tile part={this.props.part}
+                            colId={colId} rowId={rowId}
+                            key={`${rowId}, ${colId}`} />);
     return (
       <div className="grid-col" key={colId}>
         { col }

@@ -34,12 +34,11 @@ class Sequencer extends React.Component {
     }).toMaster();
 
     let part = new Tone.Part((time, note) => {
-      synth.triggerAttackRelease(note, "32n", time);
+      synth.triggerAttackRelease(note, "16n", time);
     }, [[0, []]]);
     part.loop = true;
     part.loopEnd = "1m";
     part.start(0);
-    part.add(0, ["C3", "E3"]);
     this.state.part = part;
   }
 
