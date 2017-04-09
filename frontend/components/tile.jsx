@@ -7,20 +7,22 @@ class Tile extends React.Component {
     super(props);
     this.state = { status: "off", playing: "no" };
     this.toggleStatus = this.toggleStatus.bind(this);
-    this.flashProgress = this.flashProgress.bind(this);
+    // this.flashProgress = this.flashProgress.bind(this);
   }
 
-  componentDidMount() {
-    Tone.Transport.scheduleRepeat(
-      this.flashProgress, "1m", timeStarts[this.props.colId]
-    );
-  }
+  // componentDidMount() {
+  //   Tone.Transport.scheduleRepeat(
+  //     this.flashProgress, "1m", timeStarts[this.props.colId]
+  //   );
+  // }
+  
 
-  flashProgress() {
-    this.setState({ playing: "yes" });
-    // console.log(this.state);
-    setTimeout(() => this.setState({ playing: "no" }), 150);
-  }
+  // //refactor this to columns instead of indiv tiles
+  // flashProgress() {
+  //   this.setState({ playing: "yes" });
+  //   // console.log(this.state);
+  //   setTimeout(() => this.setState({ playing: "no" }), 150);
+  // }
 
   toggleStatus() {
     let status;
