@@ -34,7 +34,7 @@ body {
 }
 
 .grid-box {
-  width: 60vw;
+  width: 480px;
 }
 
 .grid-col {
@@ -46,8 +46,9 @@ body {
 .tile {
   border: 1px solid black;
   border-radius: 5px;
-  height: 20px;
-  width: 20px;
+  height: 26px;
+  width: 26px;
+  margin: 1px;
 }
 
 .off {
