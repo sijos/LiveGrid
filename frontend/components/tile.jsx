@@ -5,7 +5,7 @@ import { timeStarts, synthNotes } from './constants';
 class Tile extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { status: "off", playing: "no" };
+    this.state = { status: "off" };
     this.toggleStatus = this.toggleStatus.bind(this);
     // this.flashProgress = this.flashProgress.bind(this);
   }
@@ -41,7 +41,7 @@ class Tile extends React.Component {
   
   render() {
     return(
-      <div className={`tile ${this.state.status} ${this.state.playing}`}
+      <div className={`tile ${this.state.status}`}
            onClick={this.toggleStatus}
            id={[this.props.colId, this.props.rowId]}>
       </div>

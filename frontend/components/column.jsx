@@ -1,10 +1,24 @@
 import React from 'react';
 import Tone from 'tone';
 import Tile from './tile';
+import { timeStarts } from './constants';
 
 class Column extends React.Component {
   constructor(props) {
     super(props);
+    this.state = { bar: "stopped" };
+    this.flashProgressBar = this.flashProgressBar.bind(this);
+  }
+
+  componentDidMount() {
+    Tone.Transport.scheduleRepeat(
+      this.flashProgressBar, "1m", timeStarts[this.props.colId]
+    );
+  }
+
+  flashProgressBar() {
+    this.setState({ bar: "playing" });
+    setTimeout(() => this.setState({ bar: "stopped" }), 100);
   }
 
   render() {
@@ -16,7 +30,7 @@ class Column extends React.Component {
             key={`${rowId}, ${this.props.colId}`} />
     );
     return (
-      <div className="grid-col">
+      <div className={`grid-col ${this.state.bar}`}>
         { col }
       </div>
     );

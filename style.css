@@ -83,14 +83,14 @@ h1 {
   background-color: hotpink;
 }
 
-.yes {
+.playing > div {
   opacity: 1;
   box-shadow: 5px, 5px, black; 
-  transition: 0.1s;
+  /*transition: 0.1s;*/
 }
 
-.no {
+.stopped > div {
   opacity: 0.325;
   box-shadow: none;
-  transition: opacity 0.5s, box-shadow 0.5s;
+  /*transition: opacity 0.5s, box-shadow 0.5s;*/
 }
