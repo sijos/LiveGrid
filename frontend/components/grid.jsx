@@ -23,6 +23,7 @@ class Grid extends React.Component {
     this.state = { grid: defaultGrid() };
     this.setTile = this.setTile.bind(this);
     this.toggleTile = this.toggleTile.bind(this);
+    this.clearGrid = this.clearGrid.bind(this);
   }
 
   // delete later
@@ -58,13 +59,18 @@ class Grid extends React.Component {
     );
   }
 
+  clearGrid() {
+    this.setState({ grid: defaultGrid() });
+    this.props.part.removeAll();
+  }
+
   render() {
     const rows = Array.from(Array(16).keys());
     const grid = rows.map(colId => this.renderCol(colId));
     return(
       <div>
         <div className="grid-box">{grid}</div>
-        <Controls />
+        <Controls clearGrid={this.clearGrid}/>
       </div>
     );
   }
