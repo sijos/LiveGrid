@@ -11,11 +11,20 @@ class Controls extends React.Component {
     }
   }
 
+  // this doesnt work
+  // clear() {
+  //   let actives = Array.from(document.querySelectorAll('.on'));
+  //   actives.forEach((tile) => tile.click());
+  // }
+
   render() {
     return (
       <div className="control-panel">
         <button className="play-pause"
                 onClick={this.play}>Play/Pause
+        </button>
+        <button className="clear"
+                onClick={this.clear}>Clear Grid
         </button>
       </div>
     );
