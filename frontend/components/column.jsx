@@ -7,18 +7,25 @@ class Column extends React.Component {
   constructor(props) {
     super(props);
     this.state = { bar: "stopped" };
-    this.flashProgressBar = this.flashProgressBar.bind(this);
+    this.flashProgressOn = this.flashProgressOn.bind(this);
+    this.flashProgressOff = this.flashProgressOff.bind(this);
   }
 
   componentDidMount() {
     Tone.Transport.scheduleRepeat(
-      this.flashProgressBar, "1m", timeStarts[this.props.colId]
+      this.flashProgressOn, "1m", timeStarts[this.props.colId]
+    );
+    Tone.Transport.scheduleRepeat(
+      this.flashProgressOff, "1m", `${timeStarts[this.props.colId]} + 16n`
     );
   }
 
-  flashProgressBar() {
+  flashProgressOn() {
     this.setState({ bar: "playing" });
-    setTimeout(() => this.setState({ bar: "stopped" }), 100);
+  }
+
+  flashProgressOff() {
+    this.setState({ bar: "stopped "});
   }
 
   render() {
