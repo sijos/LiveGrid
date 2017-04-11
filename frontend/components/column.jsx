@@ -28,12 +28,13 @@ class Column extends React.Component {
     this.setState({ bar: "stopped "});
   }
 
+
   render() {
     let col = Array.from(Array(16).keys());
     col = col.map(rowId => 
-      <Tile part={this.props.part}
-            colId={this.props.colId}
-            rowId={rowId}
+      <Tile colId={this.props.colId} rowId={rowId}
+            val={this.props.vals[rowId]}
+            toggleTile={this.props.toggleTile}
             key={`${rowId}, ${this.props.colId}`} />
     );
     return (
