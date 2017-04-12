@@ -11,6 +11,11 @@ class Controls extends React.Component {
     }
   }
 
+  fxTest() {
+    let dist = new Tone.Distortion(0.9).toMaster();
+    Tone.Master.chain(dist);
+  }
+
   render() {
     return (
       <div className="control-panel">
@@ -20,6 +25,7 @@ class Controls extends React.Component {
         <button className="clear"
                 onClick={this.props.clearGrid}>Clear Grid
         </button>
+        <button onClick={this.fxTest.bind(this)}>FX</button>
       </div>
     );
   }
