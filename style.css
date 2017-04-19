@@ -65,93 +65,100 @@ h1 {
 }
 
 .tile:hover {
-  border: 1px solid yellow;
-  box-shadow: 1px 1px 1px yellow;
-}
-
-.synth {
-  height: 30px;
-  width: 30px;
-  background-color: hotpink;
+  border: 1px solid #FFFF01;
 }
 
 .playing > div {
   opacity: 0.5;
-  box-shadow: 0px 0px 40px, 25px, white; 
 }
 
 .stopped > div {
   opacity: 0.25;
-  box-shadow: none;
+}
+
+.stopped > div.on {
+  opacity: 0.7
+}
+
+.playing > div.on {
+  animation: flash 1s;
+}
+
+.row-0 {
+  background-color: #FE0000;
+  color: #FE0000;
+}
+.row-1 {
+  background-color: #FF7F00;
+  color: #FF7F00;
+}
+.row-2 {
+  background-color: #FFC000;
+  color: #FFC000;
+}
+.row-3 {
+  background-color: #FFFF01;
+  color: #FFFF01;
+}
+.row-4 {
+  background-color: #40FF01;
+  color: #40FF01;
+}
+.row-5 {
+  background-color: #00FE81;
+  color: #00FE81;
+}
+.row-6 {
+  background-color: #01FFC1;
+  color: #01FFC1;
+}
+.row-7 {
+  background-color: #01FFFF;
+  color: #01FFFF;
+}
+.row-8 {
+  background-color: #00C0FF;
+  color: #00C0FF;
+}
+.row-9 {
+  background-color: #0000FE;
+  color: #0000FE;
+}
+.row-10 {
+  background-color: #BF00FE;
+  color: #BF00FE;
+}
+.row-11 {
+  background-color: #FF00FE;
+  color: #FF00FE;
+}
+.row-12 {
+  background-color: #FFFFFF;
+  color: #FFFFFF;
+}
+.row-13 {
+  background-color: #A8A8A8;
+  color: #A8A8A8;
+}
+.row-14 {
+  background-color: #545454;
+  color: #545454;
+}
+.row-15 {
+  background-color: #000000;
+  color: #000000;
 }
 
 .off {
   background-color: gray;
+  box-shadow: none;
 }
 
-.playing > div.on {
-  opacity: 1;
+@keyframes flash {
+  from { opacity: 0.75 }
+  10% { opacity: 1; box-shadow: 0px 0px 15px 10px }
+  to { opacity: 0.75 }
 }
-
-.stopped > div.on {
-  opacity: 0.65;
-  transition: opacity 0.5s;
-}
-
-.on.row-0 {
-  background-color: #FE0000;
-}
-.playing > div.on.row-0 {
-  box-shadow: 0px 0px 15px 13px #FE0000;
-  transition: box-shadow 0.1s;
-}
-.on.row-1 {
-  background-color: #FF7F00;
-}
-.on.row-2 {
-  background-color: #FFC000;
-}
-.on.row-3 {
-  background-color: #FFFF01;
-}
-.on.row-4 {
-  background-color: #40FF01;
-}
-.on.row-5 {
-  background-color: #00FE81;
-}
-.on.row-6 {
-  background-color: #01FFC1;
-}
-.on.row-7 {
-  background-color: #01FFFF;
-}
-.on.row-8 {
-  background-color: #00C0FF;
-}
-.on.row-9 {
-  background-color: #0000FE;
-}
-.on.row-10 {
-  background-color: #BF00FE;
-}
-.on.row-11 {
-  background-color: #FF00FE;
-}
-.on.row-12 {
-  background-color: #FFFFFF;
-}
-.on.row-13 {
-  background-color: #A8A8A8;
-}
-.on.row-14 {
-  background-color: #545454;
-}
-.on.row-15 {
-  background-color: #000000;
-}
-
-
 
 /*
 colors
