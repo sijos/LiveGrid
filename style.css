@@ -76,22 +76,100 @@ h1 {
 }
 
 .playing > div {
-  opacity: 1;
+  opacity: 0.5;
   box-shadow: 0px 0px 40px, 25px, white; 
-  /*transition: 0.1s;*/
 }
 
 .stopped > div {
-  opacity: 0.325;
+  opacity: 0.25;
   box-shadow: none;
-  /*transition: opacity 0.2s, box-shadow 0.2s;*/
 }
 
 .off {
   background-color: gray;
 }
 
-.on {
-  background-color: limegreen;
-  opacity: 0.75;
+.playing > div.on {
+  opacity: 1;
 }
+
+.stopped > div.on {
+  opacity: 0.65;
+  transition: opacity 0.5s;
+}
+
+.on.row-0 {
+  background-color: #FE0000;
+}
+.playing > div.on.row-0 {
+  box-shadow: 0px 0px 15px 13px #FE0000;
+  transition: box-shadow 0.1s;
+}
+.on.row-1 {
+  background-color: #FF7F00;
+}
+.on.row-2 {
+  background-color: #FFC000;
+}
+.on.row-3 {
+  background-color: #FFFF01;
+}
+.on.row-4 {
+  background-color: #40FF01;
+}
+.on.row-5 {
+  background-color: #00FE81;
+}
+.on.row-6 {
+  background-color: #01FFC1;
+}
+.on.row-7 {
+  background-color: #01FFFF;
+}
+.on.row-8 {
+  background-color: #00C0FF;
+}
+.on.row-9 {
+  background-color: #0000FE;
+}
+.on.row-10 {
+  background-color: #BF00FE;
+}
+.on.row-11 {
+  background-color: #FF00FE;
+}
+.on.row-12 {
+  background-color: #FFFFFF;
+}
+.on.row-13 {
+  background-color: #A8A8A8;
+}
+.on.row-14 {
+  background-color: #545454;
+}
+.on.row-15 {
+  background-color: #000000;
+}
+
+
+
+/*
+colors
+0: #FE0000
+1: #FF7F00
+2: #FFC000
+3: #00FE81
+4: #C0FF00
+5: #40FF01
+6: #01FFC1
+7: #01FFFF
+8: #00C0FF
+9: #0000FE
+10: #BF00FE
+11: #FF00FE
+12: #FFFFFF
+13: #A8A8A8
+14: #545454
+15: #000000
+#FFFF01
+*/

@@ -15,7 +15,7 @@ class Tile extends React.Component {
   render() {
     const display = (this.props.val) ? "on" : "off";
     return(
-      <div className={`tile ${display}`}
+      <div className={`tile ${display} row-${this.props.rowId}`}
            onClick={this.toggleStatus}
            id={[this.props.colId, this.props.rowId]}>
       </div>
