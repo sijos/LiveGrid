@@ -40,7 +40,7 @@ class Grid extends React.Component {
 
   toggleTile(pos) {
     let [row, col] = pos;
-    let newVal = !this.state.grid[row][pos];
+    let newVal = !this.state.grid[row][col];
     const note = synthNotes[row];
     const time = timeStarts[col];
     if (newVal) {
