@@ -12,8 +12,9 @@ class Controls extends React.Component {
   }
 
   fxTest() {
-    let dist = new Tone.Distortion(0.9).toMaster();
-    Tone.Master.chain(dist);
+    console.log(this.props.part);
+    // let dist = new Tone.Distortion(0.9).toMaster();
+    // Tone.Master.chain(dist);
   }
 
   render() {
