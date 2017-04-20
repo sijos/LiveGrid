@@ -7,11 +7,21 @@
     <link href="https://fonts.googleapis.com/css?family=Audiowide|Exo+2" rel="stylesheet">
     <link href="./style.css" rel="stylesheet">
     <script src="./bundle.js"></script>
+    <script src="build/interface.js"></script>
   </head>
   <body>
     <h1>LiveGrid</h1>
     <p>Click tiles to activate and start making music!</p>
     <div id="root"></div>
+        <script>
+             Interface.Slider({
+                  name: "BPM",
+                  value: 120,
+                  min: 80,
+                  max: 200
+                })
+              Interface.Loader();
+        </script>
   </body>
   
 </html>
