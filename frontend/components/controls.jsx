@@ -2,6 +2,12 @@ import React from 'react';
 import Tone from 'tone';
 
 class Controls extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      fx1: false
+    };
+  }
 
   play() {
     if (Tone.Transport.state === "started") {
@@ -12,7 +18,9 @@ class Controls extends React.Component {
   }
 
   fxTest() {
-    console.log(this.props.part);
+    // console.log(this.props.synth);
+    let chorus = new Tone.Chorus;
+    this.props.synth.chain(chorus, Tone.Master);
     // let dist = new Tone.Distortion(0.9).toMaster();
     // Tone.Master.chain(dist);
   }
