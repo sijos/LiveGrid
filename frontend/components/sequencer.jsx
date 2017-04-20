@@ -40,10 +40,11 @@ class Sequencer extends React.Component {
     part.loopEnd = "1m";
     part.start(0);
     this.state.part = part;
+    this.state.synth = synth;
   }
 
   render() {
-    return <div><Grid part={this.state.part}/></div> ;
+    return <div><Grid part={this.state.part} synth={this.state.synth}/></div> ;
   }
 }
 

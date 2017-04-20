@@ -70,7 +70,8 @@ class Grid extends React.Component {
     return(
       <div>
         <div className="grid-box">{grid}</div>
-        <Controls clearGrid={this.clearGrid} part={this.props.part}/>
+        <Controls clearGrid={this.clearGrid} 
+          synth={this.props.synth} part={this.props.part}/>
       </div>
     );
   }
