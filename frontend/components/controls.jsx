@@ -6,7 +6,8 @@ class Controls extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      fx1: false
+      fx1: false,
+      bpm: 120
     };
   }
 
@@ -22,14 +23,16 @@ class Controls extends React.Component {
       max: 200,
       value: 120,
       onvaluechange: () => {
-        if (slider.value) {
-          this.setState({ bpm: slider.value });
-          Tone.Transport.bpm.value = slider.value;
-        }
+        if(slider.value) { this.setTempo( slider.value ); }
       }
     });
 
     panel.add(slider);
+  }
+
+  setTempo(value = 120) {
+    this.setState({ bpm: value });
+    Tone.Transport.bpm.value = value;
   }
 
   play() {
@@ -70,3 +73,11 @@ class Controls extends React.Component {
 }
 
 export default Controls;
+
+
+// () => {
+//         if (slider.value) {
+//           this.setState({ bpm: slider.value });
+//           Tone.Transport.bpm.value = slider.value;
+//         }
+// }
