@@ -45,6 +45,12 @@ h1 {
   font-size: 30px;
 }
 
+#container {
+  top: 650px !important;
+  left: 200px !important;
+  width: 730px !important;
+}
+
 .grid-box {
   width: 480px;
 }
