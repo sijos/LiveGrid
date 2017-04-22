@@ -6,9 +6,14 @@ class Controls extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      fx1: false,
+      fx1: {
+        on: false,
+        effect: new Tone.Chorus({ "wet": 0.75 }),
+        name: "Chorus"
+      },
       bpm: 120
     };
+    this.toggleFx = this.toggleFx.bind(this);
   }
 
   componentDidMount() {
@@ -27,12 +32,30 @@ class Controls extends React.Component {
       }
     });
 
-    panel.add(slider);
+    let knob1 = new Interface.Knob({ 
+      bounds: [0.5, 0, 0.1, 0.1],
+      value: 0.75,
+      usesRotation: true,
+      centerZero: false,
+      onvaluechange: () => {
+        if(knob1.value) { this.setDryWet( knob1.value, "fx1"); }
+      }
+    });
+
+    console.log(panel);
+
+    panel.add(slider, knob1);
   }
 
   setTempo(value = 120) {
     this.setState({ bpm: value });
     Tone.Transport.bpm.value = value;
+  }
+
+  setDryWet(value, fxNum) {
+    let fx = this.state[fxNum];
+    fx.effect.wet.value = value;
+    this.setState({ fx1: fx });
   }
 
   play() {
@@ -43,17 +66,20 @@ class Controls extends React.Component {
     }
   }
 
-  fxTest() {
-    // console.log(this.props.synth);
-    let chorus = new Tone.Chorus;
-    this.props.synth.chain(chorus, Tone.Master);
-    // let dist = new Tone.Distortion(0.9).toMaster();
-    // Tone.Master.chain(dist);
+  toggleFx() {
+    let fx = this.state.fx1;
+    if (fx.on) {
+      fx.effect.dispose();
+      fx.effect = new Tone.Chorus;
+    } else {
+      this.props.synth.chain(fx.effect, Tone.Master);
+    }
+    fx.on = !fx.on;
+    this.setState({ fx1: fx });
   }
 
   stateLog() {
     console.log(this.state);
-    console.log(Tone.Transport.bpm.value);
   }
 
   render() {
@@ -65,7 +91,7 @@ class Controls extends React.Component {
         <button className="clear"
                 onClick={this.props.clearGrid}>Clear Grid
         </button>
-        <button onClick={this.fxTest.bind(this)}>FX</button>
+        <button onClick={this.toggleFx}>FX</button>
         <button onClick={this.stateLog.bind(this)}>State</button>
       </div>
     );
