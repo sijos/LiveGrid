@@ -1,5 +1,6 @@
 import React from 'react';
 import Tone from 'tone';
+import { panel, slider } from '../../widgets';
 
 class Controls extends React.Component {
   constructor(props) {
@@ -8,6 +9,12 @@ class Controls extends React.Component {
       fx1: false
     };
   }
+
+  // componentWillMount() {
+  //   console.log(panel);
+  //   console.log(slider);
+  //   panel.add(slider);
+  // }
 
   play() {
     if (Tone.Transport.state === "started") {
