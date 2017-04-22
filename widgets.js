@@ -11,7 +11,7 @@ let slider = new Interface.Slider({
   min: 80,
   max: 200,
   value: 120,
-  drag: function(val) { console.log(val); }
+  onChange: function(val) { console.log(val); }
 });
 
 panel.add(slider);
