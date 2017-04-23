@@ -1,6 +1,7 @@
 import React from 'react';
 import Tone from 'tone';
 import Interface from '../../build/interface';
+import { fxMap } from './constants';
 
 class Controls extends React.Component {
   constructor(props) {
@@ -8,8 +9,18 @@ class Controls extends React.Component {
     this.state = {
       fx1: {
         on: false,
-        effect: new Tone.Chorus({ "wet": 0.75 }),
-        name: "Chorus"
+        name: "Chorus",
+        effect: fxMap["Chorus"]()
+      },
+      fx2: {
+        on: false,
+        name: "Phaser",
+        effect: fxMap["Phaser"]()
+      },
+      fx3: {
+        on: false,
+        name: "JCReverb",
+        effect: fxMap["JCReverb"]()
       },
       bpm: 120
     };
@@ -42,9 +53,29 @@ class Controls extends React.Component {
       }
     });
 
+    let knob2 = new Interface.Knob({ 
+      bounds: [0.5, 0.2, 0.1, 0.1],
+      value: 0.75,
+      usesRotation: true,
+      centerZero: false,
+      onvaluechange: () => {
+        if(knob2.value) { this.setDryWet( knob2.value, "fx2"); }
+      }
+    });
+
+    let knob3 = new Interface.Knob({ 
+      bounds: [0.5, 0.4, 0.1, 0.1],
+      value: 0.75,
+      usesRotation: true,
+      centerZero: false,
+      onvaluechange: () => {
+        if(knob3.value) { this.setDryWet( knob3.value, "fx3"); }
+      }
+    });
+
     console.log(panel);
 
-    panel.add(slider, knob1);
+    panel.add(slider, knob1, knob2, knob3);
   }
 
   setTempo(value = 120) {
@@ -55,7 +86,7 @@ class Controls extends React.Component {
   setDryWet(value, fxNum) {
     let fx = this.state[fxNum];
     fx.effect.wet.value = value;
-    this.setState({ fx1: fx });
+    this.state[fxNum] = fx;
   }
 
   play() {
@@ -66,16 +97,20 @@ class Controls extends React.Component {
     }
   }
 
-  toggleFx() {
-    let fx = this.state.fx1;
-    if (fx.on) {
-      fx.effect.dispose();
-      fx.effect = new Tone.Chorus;
-    } else {
-      this.props.synth.chain(fx.effect, Tone.Master);
+  toggleFx(fxNum) {
+    let fx = this.state[fxNum];
+    // let name = fx.name;
+    return () => {
+      if (fx.on) {
+        fx.effect.dispose();
+        // console.log(fxMap[name]);
+        fx.effect = fxMap[fx.name]();
+      } else {
+        this.props.synth.chain(fx.effect, Tone.Master);
+      }
+      fx.on = !fx.on;
+      this.state[fxNum] = fx;
     }
-    fx.on = !fx.on;
-    this.setState({ fx1: fx });
   }
 
   stateLog() {
@@ -91,7 +126,9 @@ class Controls extends React.Component {
         <button className="clear"
                 onClick={this.props.clearGrid}>Clear Grid
         </button>
-        <button onClick={this.toggleFx}>FX</button>
+        <button onClick={this.toggleFx("fx1")}>FX1</button>
+        <button onClick={this.toggleFx("fx2")}>FX2</button>
+        <button onClick={this.toggleFx("fx3")}>FX3</button>
         <button onClick={this.stateLog.bind(this)}>State</button>
       </div>
     );
@@ -99,11 +136,3 @@ class Controls extends React.Component {
 }
 
 export default Controls;
-
-
-// () => {
-//         if (slider.value) {
-//           this.setState({ bpm: slider.value });
-//           Tone.Transport.bpm.value = slider.value;
-//         }
-// }

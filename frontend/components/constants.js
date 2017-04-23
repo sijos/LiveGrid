@@ -1,3 +1,5 @@
+import Tone from 'tone';
+
 export const timeStarts = {
   0: 0,
   1: "16n",
@@ -35,4 +37,10 @@ export const synthNotes = {
   13: "E3",
   14: "D3",
   15: "C3"
+};
+
+export const fxMap = {
+  "Chorus": () => new Tone.Chorus({ "wet": 0.75 }),
+  "Phaser": () => new Tone.Phaser({ "wet": 0.75 }),
+  "JCReverb": () => new Tone.JCReverb({ "wet": 0.75})
 };
