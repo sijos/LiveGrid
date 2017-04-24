@@ -3,27 +3,17 @@ import Tone from 'tone';
 import Interface from '../../build/interface';
 import { fxMap } from './constants';
 
+const defaultState = {
+  fx1: { on: false, name: "Chorus", effect: fxMap["Chorus"]() },
+  fx2: { on: false, name: "Phaser", effect: fxMap["Phaser"]() },
+  fx3: { on: false, name: "JCReverb", effect: fxMap["JCReverb"]() },
+  bpm: 120
+}
+
 class Controls extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      fx1: {
-        on: false,
-        name: "Chorus",
-        effect: fxMap["Chorus"]()
-      },
-      fx2: {
-        on: false,
-        name: "Phaser",
-        effect: fxMap["Phaser"]()
-      },
-      fx3: {
-        on: false,
-        name: "JCReverb",
-        effect: fxMap["JCReverb"]()
-      },
-      bpm: 120
-    };
+    this.state = defaultState;
     this.toggleFx = this.toggleFx.bind(this);
   }
 
@@ -73,6 +63,7 @@ class Controls extends React.Component {
       }
     });
 
+    //remove before completion
     console.log(panel);
 
     panel.add(slider, knob1, knob2, knob3);
@@ -99,11 +90,9 @@ class Controls extends React.Component {
 
   toggleFx(fxNum) {
     let fx = this.state[fxNum];
-    // let name = fx.name;
     return () => {
       if (fx.on) {
         fx.effect.dispose();
-        // console.log(fxMap[name]);
         fx.effect = fxMap[fx.name]();
       } else {
         this.props.synth.chain(fx.effect, Tone.Master);
@@ -113,6 +102,7 @@ class Controls extends React.Component {
     }
   }
 
+  //remove before completion
   stateLog() {
     console.log(this.state);
   }
