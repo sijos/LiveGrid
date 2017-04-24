@@ -24,7 +24,7 @@ class Controls extends React.Component {
 
     let slider = new Interface.Slider({
       isVertical: false,
-      bounds: [0, 0, .1, .2],
+      bounds: [0.25, 0.015, .25, .05],
       min: 80,
       max: 200,
       value: 120,
@@ -34,7 +34,7 @@ class Controls extends React.Component {
     });
 
     let knob1 = new Interface.Knob({ 
-      bounds: [0.5, 0, 0.1, 0.1],
+      bounds: [0.52, 0, 0.05, 0.05],
       value: 0.75,
       usesRotation: true,
       centerZero: false,
@@ -44,7 +44,7 @@ class Controls extends React.Component {
     });
 
     let knob2 = new Interface.Knob({ 
-      bounds: [0.5, 0.2, 0.1, 0.1],
+      bounds: [0.59, 0, 0.05, 0.05],
       value: 0.75,
       usesRotation: true,
       centerZero: false,
@@ -54,7 +54,7 @@ class Controls extends React.Component {
     });
 
     let knob3 = new Interface.Knob({ 
-      bounds: [0.5, 0.4, 0.1, 0.1],
+      bounds: [0.66, 0, 0.05, 0.05],
       value: 0.75,
       usesRotation: true,
       centerZero: false,
@@ -119,10 +119,11 @@ class Controls extends React.Component {
         <button onClick={this.toggleFx("fx1")}>FX1</button>
         <button onClick={this.toggleFx("fx2")}>FX2</button>
         <button onClick={this.toggleFx("fx3")}>FX3</button>
-        <button onClick={this.stateLog.bind(this)}>State</button>
       </div>
     );
   }
 }
 
 export default Controls;
+
+        // <button onClick={this.stateLog.bind(this)}>State</button>
