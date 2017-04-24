@@ -45,14 +45,25 @@ h1 {
   font-size: 30px;
 }
 
+button {
+  border: 1px solid white;
+  padding: 4px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
 #container {
   top: 650px !important;
-  left: 200px !important;
-  width: 730px !important;
 }
 
 .grid-box {
   width: 480px;
+}
+
+.control-panel {
+  margin-top: 15px;
+  display: flex;
+  justify-content: space-between;
 }
 
 .grid-col {
@@ -68,10 +79,6 @@ h1 {
   width: 26px;
   margin: 1px;
   cursor: pointer;
-}
-
-.tile:hover {
-  border: 1px solid #FFFF01;
 }
 
 .playing > div {
@@ -153,6 +160,11 @@ h1 {
 .row-15 {
   background-color: #000000;
   color: #000000;
+}
+
+.tile:hover {
+  border: 1px solid;
+  opacity: 1;
 }
 
 .off {
