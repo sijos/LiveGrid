@@ -52,9 +52,10 @@ button {
   cursor: pointer;
 }
 
-#container {
+/*#container {
   top: 650px !important;
-}
+  position: relative !important;
+}*/
 
 .grid-box {
   width: 480px;
