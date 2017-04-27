@@ -7,7 +7,8 @@ const defaultState = {
   fx1: { on: false, name: "Chorus", effect: fxMap["Chorus"]() },
   fx2: { on: false, name: "Phaser", effect: fxMap["Phaser"]() },
   fx3: { on: false, name: "JCReverb", effect: fxMap["JCReverb"]() },
-  bpm: 120
+  bpm: 120,
+  playing: true
 }
 
 class Controls extends React.Component {
@@ -15,6 +16,7 @@ class Controls extends React.Component {
     super(props);
     this.state = defaultState;
     this.toggleFx = this.toggleFx.bind(this);
+    this.play = this.play.bind(this);
   }
 
   componentDidMount() {
@@ -83,8 +85,10 @@ class Controls extends React.Component {
   play() {
     if (Tone.Transport.state === "started") {
       Tone.Transport.pause();
+      this.setState({ playing: false })
     } else {
       Tone.Transport.start();
+      this.setState({ playing: true })
     }
   }
 
@@ -108,22 +112,26 @@ class Controls extends React.Component {
   }
 
   render() {
+    const buttonLogo = this.state.playing ?
+      <i className="fa fa-pause-circle-o fa-3x" /> : 
+      <i className="fa fa-play-circle-o fa-3x" />
     return (
       <div className="control-panel">
-        <button className="play-pause"
-                onClick={this.play}>Play/Pause
-        </button>
-        <button className="clear"
-                onClick={this.props.clearGrid}>Clear Grid
-        </button>
+        <section className="grid-control">
+          <button className="play-pause"
+                  onClick={this.play}>{buttonLogo}
+          </button>
+          <button className="clear"
+                  onClick={this.props.clearGrid}>Clear Grid
+          </button>
+        </section>
         <button onClick={this.toggleFx("fx1")}>FX1</button>
         <button onClick={this.toggleFx("fx2")}>FX2</button>
         <button onClick={this.toggleFx("fx3")}>FX3</button>
+        <button onClick={this.stateLog.bind(this)}>State</button>
       </div>
     );
   }
 }
 
 export default Controls;
-
-        // <button onClick={this.stateLog.bind(this)}>State</button>
