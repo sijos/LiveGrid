@@ -52,19 +52,18 @@ button {
   cursor: pointer;
 }
 
-/*#container {
-  top: 650px !important;
-  position: relative !important;
-}*/
+.main-content {
+  display: flex;
+}
 
 .grid-box {
   width: 480px;
 }
 
 .control-panel {
-  margin-top: 15px;
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .grid-col {

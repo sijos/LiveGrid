@@ -68,7 +68,7 @@ class Grid extends React.Component {
     const rows = Array.from(Array(16).keys());
     const grid = rows.map(colId => this.renderCol(colId));
     return(
-      <div>
+      <div className="main-content">
         <div className="grid-box">{grid}</div>
         <Controls clearGrid={this.clearGrid} 
           synth={this.props.synth} part={this.props.part}/>
