@@ -64,6 +64,15 @@ button {
   display: flex;
   flex-direction: column;
   justify-content: center;
+  margin-left: 35px;
+}
+
+.grid-control {
+  background: url('../../images/metal.jpg')
+}
+
+.play-pause {
+  border: none;
 }
 
 .grid-col {
