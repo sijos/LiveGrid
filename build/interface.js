@@ -219,7 +219,7 @@ Interface.Panel = function() {
           padding:0,
           position:'absolute',
           left:0,
-          top:650
+          top:800
         });
         
         $('body').append(d);
