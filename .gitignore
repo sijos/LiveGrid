@@ -77,11 +77,6 @@ rerun.txt
 pickle-email-*.html
 
 
-## Webpack:
-
-bundle.js.map
-
-
 ### Node ###
 
 # Logs
