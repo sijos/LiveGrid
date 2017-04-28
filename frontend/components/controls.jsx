@@ -118,20 +118,34 @@ class Controls extends React.Component {
     return (
       <div className="control-panel">
         <section className="grid-control">
-          <button className="play-pause"
-                  onClick={this.play}>{buttonLogo}
-          </button>
-          <button className="clear"
-                  onClick={this.props.clearGrid}>Clear Grid
-          </button>
+          <div className="top">
+            <button className="play-pause"
+                    onClick={this.play}>{buttonLogo}
+            </button>
+            <button className="clear"
+                    onClick={this.props.clearGrid}>Clear Grid
+            </button>
+          </div>
+          <label>Set Tempo/BPM:</label>
+          <label>{Math.round(this.state.bpm)}</label>
         </section>
-        <button onClick={this.toggleFx("fx1")}>FX1</button>
-        <button onClick={this.toggleFx("fx2")}>FX2</button>
-        <button onClick={this.toggleFx("fx3")}>FX3</button>
-        <button onClick={this.stateLog.bind(this)}>State</button>
+        <section className="fx">
+          <label>{this.state.fx1.name}</label>
+          <button onClick={this.toggleFx("fx1")}>FX1</button>
+        </section>
+        <section className="fx">
+          <label>{this.state.fx2.name}</label>
+          <button onClick={this.toggleFx("fx2")}>FX2</button>
+        </section>
+        <section className="fx">
+          <label>{this.state.fx3.name}</label>
+          <button onClick={this.toggleFx("fx3")}>FX3</button>
+        </section>
       </div>
     );
   }
 }
 
 export default Controls;
+
+        // <button onClick={this.stateLog.bind(this)}>State</button>
