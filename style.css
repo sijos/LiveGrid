@@ -37,6 +37,12 @@ body {
 body * {
   color: white;
   font-family: 'Exo 2', sans-serif;
+  -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+     -khtml-user-select: none; /* Konqueror HTML */
+       -moz-user-select: none; /* Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none; /* Non-prefixed version, currently supported by Chrome and Opera */
 }
 
 h1 {
@@ -85,8 +91,13 @@ button {
 
 .play-pause {
   border: none;
+  margin-right: 40px;
 }
 
+.bpm {
+  z-index: 10;
+  margin-top: 16px;
+}
 .fx {
   width: 90px;
   display: flex;
@@ -94,6 +105,10 @@ button {
   justify-content: flex-start;
   align-items: center;
   border: 1px solid gray;
+}
+
+.fx > label {
+  margin-bottom: 10px;
 }
 
 .grid-col {
