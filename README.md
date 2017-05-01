@@ -1,5 +1,9 @@
 ## LiveGrid
 
+[Live][live]
+
+[live]: https://sijos.github.io/LiveGrid/
+
 ### Background
 
 LiveGrid is a new take on a live music interface based on a looping sequence of sounds. The sounds are queued by a user's selection of squares on a 16 x 16 grid, each row representing a different sound and each column representing a beat within a measure. The squares highlight when selected and are then played in sequence as the vertical progress bar passes through each column. If this is unfamiliar, refer to [tonematrix][tonematrix] and [beatlab][beatlab] for two other previous implementations of this concept.
