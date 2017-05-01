@@ -19,14 +19,18 @@ class Controls extends React.Component {
     this.play = this.play.bind(this);
   }
 
+  componentWillMount() {
+  }
+
   componentDidMount() {
+    let middle = window.innerWidth / 2;
     let panel = new Interface.Panel({
-      useRelativeSizesAndPositions: true
+      useRelativeSizesAndPositions: false
     });
 
     let slider = new Interface.Slider({
       isVertical: false,
-      bounds: [0.25, 0.015, .25, .05],
+      bounds: [middle - 296, 18, 220, 28],
       min: 80,
       max: 200,
       value: 120,
@@ -36,7 +40,7 @@ class Controls extends React.Component {
     });
 
     let knob1 = new Interface.Knob({ 
-      bounds: [0.52, 0, 0.05, 0.05],
+      bounds: [middle - 20, 0, 55, 55],
       value: 0.75,
       usesRotation: true,
       centerZero: false,
@@ -46,7 +50,7 @@ class Controls extends React.Component {
     });
 
     let knob2 = new Interface.Knob({ 
-      bounds: [0.59, 0, 0.05, 0.05],
+      bounds: [middle + 100, 0, 55, 55],
       value: 0.75,
       usesRotation: true,
       centerZero: false,
@@ -56,7 +60,7 @@ class Controls extends React.Component {
     });
 
     let knob3 = new Interface.Knob({ 
-      bounds: [0.66, 0, 0.05, 0.05],
+      bounds: [middle + 220, 0, 55, 55],
       value: 0.75,
       usesRotation: true,
       centerZero: false,
@@ -65,8 +69,14 @@ class Controls extends React.Component {
       }
     });
 
-    //remove before completion
-    console.log(panel);
+    window.addEventListener("resize", () => {
+      middle = window.innerWidth / 2;
+      slider['x'] = middle - 296;
+      knob1['x'] = middle - 20;
+      knob2['x'] = middle + 100;
+      knob3['x'] = middle + 220;
+      panel.refresh();
+    });
 
     panel.add(slider, knob1, knob2, knob3);
   }
@@ -113,8 +123,8 @@ class Controls extends React.Component {
 
   render() {
     const buttonLogo = this.state.playing ?
-      <i className="fa fa-pause-circle-o fa-3x" /> : 
-      <i className="fa fa-play-circle-o fa-3x" />
+      <i className="fa fa-pause-circle fa-3x" /> : 
+      <i className="fa fa-play-circle fa-3x" />
     return (
       <div className="control-panel">
         <section className="grid-control">
@@ -127,7 +137,7 @@ class Controls extends React.Component {
             </button>
           </div>
           <label>Set Tempo/BPM:</label>
-          <label>{Math.round(this.state.bpm)}</label>
+          <label className="bpm">{Math.round(this.state.bpm)}</label>
         </section>
         <section className="fx">
           <label>{this.state.fx1.name}</label>
