@@ -34,6 +34,7 @@ body {
   background-color: black;
 }
 
+/* prevent all text from being selected */
 body * {
   color: white;
   font-family: 'Exo 2', sans-serif;
@@ -109,6 +110,7 @@ button {
 
 .fx > label {
   margin-bottom: 10px;
+  margin-top: 5px;
 }
 
 .grid-col {
