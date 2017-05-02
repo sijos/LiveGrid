@@ -17,6 +17,7 @@ class Controls extends React.Component {
     this.state = defaultState;
     this.toggleFx = this.toggleFx.bind(this);
     this.renderFx = this.renderFx.bind(this);
+    this.setFx = this.setFx.bind(this);
     this.play = this.play.bind(this);
   }
 
@@ -115,12 +116,26 @@ class Controls extends React.Component {
     }
   }
 
+  setFx(fxNum) {
+    let fx = this.state[fxNum];
+    return (e) => {
+      fx.name = e.target.value;
+      fx.effect = fxMap[fx.name]();
+    }
+    this.state[fxNum] = fx;
+    this.setState(this.state);
+  }
+
   renderFx(fxNum) {
     let fx = this.state[fxNum];
     let text = fx.on ? "Off" : "On";
     return (
       <section className="fx">
-        <label>{fx.name}</label>
+        <select className="select" onChange={this.setFx(fxNum)} value={fx.name}>
+          {Object.keys(fxMap).map((name) => (
+            <option value={name} key={name}>{name}</option>
+          ))}
+        </select>
         <button onClick={this.toggleFx(fxNum)} className={`fx-${text}`}>
           {text}</button>
       </section>

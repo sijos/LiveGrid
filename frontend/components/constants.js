@@ -42,5 +42,6 @@ export const synthNotes = {
 export const fxMap = {
   "Chorus": () => new Tone.Chorus({ "wet": 0.75 }),
   "Phaser": () => new Tone.Phaser({ "wet": 0.75 }),
-  "JCReverb": () => new Tone.JCReverb({ "wet": 0.75})
+  "JCReverb": () => new Tone.JCReverb({ "wet": 0.75}),
+  "Filter": () => new Tone.AutoFilter()
 };

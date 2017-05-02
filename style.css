@@ -102,6 +102,7 @@ button {
   z-index: 10;
   margin-top: 16px;
 }
+
 .fx {
   width: 90px;
   display: flex;
@@ -112,9 +113,10 @@ button {
   border-radius: 4px;
 }
 
-.fx > label {
+.select {
   margin-bottom: 10px;
   margin-top: 5px;
+  color: black;
 }
 
 .fx-Off {
