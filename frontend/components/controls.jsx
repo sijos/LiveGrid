@@ -121,7 +121,8 @@ class Controls extends React.Component {
     return (
       <section className="fx">
         <label>{fx.name}</label>
-        <button onClick={this.toggleFx(fxNum)}>{text}</button>
+        <button onClick={this.toggleFx(fxNum)} className={`fx-${text}`}>
+          {text}</button>
       </section>
     );
   }
