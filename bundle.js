@@ -25967,13 +25967,34 @@ var synthNotes = exports.synthNotes = {
 
 var fxMap = exports.fxMap = {
   "Chorus": function Chorus() {
-    return new _tone2.default.Chorus({ "wet": 0.75 });
+    return new _tone2.default.Chorus({ "wet": 0.5 });
   },
   "Phaser": function Phaser() {
-    return new _tone2.default.Phaser({ "wet": 0.75 });
+    return new _tone2.default.Phaser({
+      "wet": 0.5,
+      "frequency": 0.3,
+      "octaves": 4,
+      "baseFrequency": 400
+    });
   },
-  "JCReverb": function JCReverb() {
-    return new _tone2.default.JCReverb({ "wet": 0.75 });
+  "Reverb": function Reverb() {
+    return new _tone2.default.JCReverb(0.325, { "wet": 0.5 });
+  },
+  // "AutoWah": () => new Tone.AutoWah(50, 6, -15, { "wet": 0.5}),
+  "BitCrusher": function BitCrusher() {
+    return new _tone2.default.BitCrusher({ "wet": 0.5 });
+  },
+  "Chebyshev": function Chebyshev() {
+    return new _tone2.default.Chebyshev(50, { "wet": 0.5 });
+  },
+  "Distortion": function Distortion() {
+    return new _tone2.default.Distortion(0.5, { "wet": 0.5 });
+  },
+  "Freeverb": function Freeverb() {
+    return new _tone2.default.Freeverb({ "wet": 0.5 });
+  },
+  "Delay": function Delay() {
+    return new _tone2.default.PingPongDelay({ "wet": 0.5 });
   }
 };
 
@@ -45788,7 +45809,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var defaultState = {
   fx1: { on: false, name: "Chorus", effect: _constants.fxMap["Chorus"]() },
   fx2: { on: false, name: "Phaser", effect: _constants.fxMap["Phaser"]() },
-  fx3: { on: false, name: "JCReverb", effect: _constants.fxMap["JCReverb"]() },
+  fx3: { on: false, name: "Reverb", effect: _constants.fxMap["Reverb"]() },
   bpm: 120,
   playing: true
 };
@@ -45803,14 +45824,13 @@ var Controls = function (_React$Component) {
 
     _this.state = defaultState;
     _this.toggleFx = _this.toggleFx.bind(_this);
+    _this.renderFx = _this.renderFx.bind(_this);
+    _this.setFx = _this.setFx.bind(_this);
     _this.play = _this.play.bind(_this);
     return _this;
   }
 
   _createClass(Controls, [{
-    key: 'componentWillMount',
-    value: function componentWillMount() {}
-  }, {
     key: 'componentDidMount',
     value: function componentDidMount() {
       var _this2 = this;
@@ -45835,7 +45855,7 @@ var Controls = function (_React$Component) {
 
       var knob1 = new _interface2.default.Knob({
         bounds: [middle - 20, 0, 55, 55],
-        value: 0.75,
+        value: 0.5,
         usesRotation: true,
         centerZero: false,
         onvaluechange: function onvaluechange() {
@@ -45847,7 +45867,7 @@ var Controls = function (_React$Component) {
 
       var knob2 = new _interface2.default.Knob({
         bounds: [middle + 100, 0, 55, 55],
-        value: 0.75,
+        value: 0.5,
         usesRotation: true,
         centerZero: false,
         onvaluechange: function onvaluechange() {
@@ -45859,7 +45879,7 @@ var Controls = function (_React$Component) {
 
       var knob3 = new _interface2.default.Knob({
         bounds: [middle + 220, 0, 55, 55],
-        value: 0.75,
+        value: 0.5,
         usesRotation: true,
         centerZero: false,
         onvaluechange: function onvaluechange() {
@@ -45868,9 +45888,6 @@ var Controls = function (_React$Component) {
           }
         }
       });
-
-      //remove before completion
-      console.log(panel);
 
       window.addEventListener("resize", function () {
         middle = window.innerWidth / 2;
@@ -45924,19 +45941,52 @@ var Controls = function (_React$Component) {
         }
         fx.on = !fx.on;
         _this3.state[fxNum] = fx;
+        _this3.setState(_this3.state);
       };
     }
-
-    //remove before completion
-
   }, {
-    key: 'stateLog',
-    value: function stateLog() {
-      console.log(this.state);
+    key: 'setFx',
+    value: function setFx(fxNum) {
+      var _this4 = this;
+
+      var fx = this.state[fxNum];
+      return function (e) {
+        fx.name = e.target.value;
+        fx.effect = _constants.fxMap[fx.name]();
+        _this4.state[fxNum] = fx;
+        _this4.setState(_this4.state);
+      };
+    }
+  }, {
+    key: 'renderFx',
+    value: function renderFx(fxNum) {
+      var fx = this.state[fxNum];
+      var text = fx.on ? "Off" : "On";
+      return _react2.default.createElement(
+        'section',
+        { className: 'fx' },
+        _react2.default.createElement(
+          'select',
+          { className: 'select', onChange: this.setFx(fxNum), value: fx.name },
+          Object.keys(_constants.fxMap).map(function (name) {
+            return _react2.default.createElement(
+              'option',
+              { value: name, key: name },
+              name
+            );
+          })
+        ),
+        _react2.default.createElement(
+          'button',
+          { onClick: this.toggleFx(fxNum), className: 'fx-' + text },
+          text
+        )
+      );
     }
   }, {
     key: 'render',
     value: function render() {
+      var fx1Status = this.state.fx1.on ? "On" : "Off";
       var buttonLogo = this.state.playing ? _react2.default.createElement('i', { className: 'fa fa-pause-circle fa-3x' }) : _react2.default.createElement('i', { className: 'fa fa-play-circle fa-3x' });
       return _react2.default.createElement(
         'div',
@@ -45971,48 +46021,9 @@ var Controls = function (_React$Component) {
             Math.round(this.state.bpm)
           )
         ),
-        _react2.default.createElement(
-          'section',
-          { className: 'fx' },
-          _react2.default.createElement(
-            'label',
-            null,
-            this.state.fx1.name
-          ),
-          _react2.default.createElement(
-            'button',
-            { onClick: this.toggleFx("fx1") },
-            'FX1'
-          )
-        ),
-        _react2.default.createElement(
-          'section',
-          { className: 'fx' },
-          _react2.default.createElement(
-            'label',
-            null,
-            this.state.fx2.name
-          ),
-          _react2.default.createElement(
-            'button',
-            { onClick: this.toggleFx("fx2") },
-            'FX2'
-          )
-        ),
-        _react2.default.createElement(
-          'section',
-          { className: 'fx' },
-          _react2.default.createElement(
-            'label',
-            null,
-            this.state.fx3.name
-          ),
-          _react2.default.createElement(
-            'button',
-            { onClick: this.toggleFx("fx3") },
-            'FX3'
-          )
-        )
+        this.renderFx("fx1"),
+        this.renderFx("fx2"),
+        this.renderFx("fx3")
       );
     }
   }]);
@@ -46021,8 +46032,6 @@ var Controls = function (_React$Component) {
 }(_react2.default.Component);
 
 exports.default = Controls;
-
-// <button onClick={this.stateLog.bind(this)}>State</button>
 
 /***/ }),
 /* 89 */
