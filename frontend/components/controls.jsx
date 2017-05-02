@@ -16,10 +16,8 @@ class Controls extends React.Component {
     super(props);
     this.state = defaultState;
     this.toggleFx = this.toggleFx.bind(this);
+    this.renderFx = this.renderFx.bind(this);
     this.play = this.play.bind(this);
-  }
-
-  componentWillMount() {
   }
 
   componentDidMount() {
@@ -113,7 +111,19 @@ class Controls extends React.Component {
       }
       fx.on = !fx.on;
       this.state[fxNum] = fx;
+      this.setState(this.state);
     }
+  }
+
+  renderFx(fxNum) {
+    let fx = this.state[fxNum];
+    let text = fx.on ? "Off" : "On";
+    return (
+      <section className="fx">
+        <label>{fx.name}</label>
+        <button onClick={this.toggleFx(fxNum)}>{text}</button>
+      </section>
+    );
   }
 
   //remove before completion
@@ -122,6 +132,7 @@ class Controls extends React.Component {
   }
 
   render() {
+    const fx1Status = this.state.fx1.on ? "On" : "Off"
     const buttonLogo = this.state.playing ?
       <i className="fa fa-pause-circle fa-3x" /> : 
       <i className="fa fa-play-circle fa-3x" />
@@ -139,18 +150,9 @@ class Controls extends React.Component {
           <label>Set Tempo/BPM:</label>
           <label className="bpm">{Math.round(this.state.bpm)}</label>
         </section>
-        <section className="fx">
-          <label>{this.state.fx1.name}</label>
-          <button onClick={this.toggleFx("fx1")}>FX1</button>
-        </section>
-        <section className="fx">
-          <label>{this.state.fx2.name}</label>
-          <button onClick={this.toggleFx("fx2")}>FX2</button>
-        </section>
-        <section className="fx">
-          <label>{this.state.fx3.name}</label>
-          <button onClick={this.toggleFx("fx3")}>FX3</button>
-        </section>
+        {this.renderFx("fx1")}
+        {this.renderFx("fx2")}
+        {this.renderFx("fx3")}
       </div>
     );
   }
