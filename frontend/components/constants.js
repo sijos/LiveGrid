@@ -40,8 +40,18 @@ export const synthNotes = {
 };
 
 export const fxMap = {
-  "Chorus": () => new Tone.Chorus({ "wet": 0.75 }),
-  "Phaser": () => new Tone.Phaser({ "wet": 0.75 }),
-  "JCReverb": () => new Tone.JCReverb({ "wet": 0.75}),
-  "Filter": () => new Tone.AutoFilter()
+  "Chorus": () => new Tone.Chorus({ "wet": 0.5 }),
+  "Phaser": () => new Tone.Phaser({ 
+    "wet": 0.5,
+    "frequency": 0.3,
+    "octaves": 4,
+    "baseFrequency": 400
+   }),
+  "Reverb": () => new Tone.JCReverb(0.325, { "wet": 0.5}),
+  // "AutoWah": () => new Tone.AutoWah(50, 6, -15, { "wet": 0.5}),
+  "BitCrusher": () => new Tone.BitCrusher({ "wet": 0.5}),
+  "Chebyshev": () => new Tone.Chebyshev(50, { "wet": 0.5}),
+  "Distortion": () => new Tone.Distortion(0.5, { "wet": 0.5}),
+  "Freeverb": () => new Tone.Freeverb({ "wet": 0.5}),
+  "Delay": () => new Tone.PingPongDelay({ "wet": 0.5})
 };

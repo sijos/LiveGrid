@@ -6,7 +6,7 @@ import { fxMap } from './constants';
 const defaultState = {
   fx1: { on: false, name: "Chorus", effect: fxMap["Chorus"]() },
   fx2: { on: false, name: "Phaser", effect: fxMap["Phaser"]() },
-  fx3: { on: false, name: "JCReverb", effect: fxMap["JCReverb"]() },
+  fx3: { on: false, name: "Reverb", effect: fxMap["Reverb"]() },
   bpm: 120,
   playing: true
 }
@@ -40,7 +40,7 @@ class Controls extends React.Component {
 
     let knob1 = new Interface.Knob({ 
       bounds: [middle - 20, 0, 55, 55],
-      value: 0.75,
+      value: 0.5,
       usesRotation: true,
       centerZero: false,
       onvaluechange: () => {
@@ -50,7 +50,7 @@ class Controls extends React.Component {
 
     let knob2 = new Interface.Knob({ 
       bounds: [middle + 100, 0, 55, 55],
-      value: 0.75,
+      value: 0.5,
       usesRotation: true,
       centerZero: false,
       onvaluechange: () => {
@@ -60,7 +60,7 @@ class Controls extends React.Component {
 
     let knob3 = new Interface.Knob({ 
       bounds: [middle + 220, 0, 55, 55],
-      value: 0.75,
+      value: 0.5,
       usesRotation: true,
       centerZero: false,
       onvaluechange: () => {
@@ -121,9 +121,9 @@ class Controls extends React.Component {
     return (e) => {
       fx.name = e.target.value;
       fx.effect = fxMap[fx.name]();
+      this.state[fxNum] = fx;
+      this.setState(this.state);
     }
-    this.state[fxNum] = fx;
-    this.setState(this.state);
   }
 
   renderFx(fxNum) {
@@ -140,11 +140,6 @@ class Controls extends React.Component {
           {text}</button>
       </section>
     );
-  }
-
-  //remove before completion
-  stateLog() {
-    console.log(this.state);
   }
 
   render() {
@@ -175,5 +170,3 @@ class Controls extends React.Component {
 }
 
 export default Controls;
-
-        // <button onClick={this.stateLog.bind(this)}>State</button>
