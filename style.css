@@ -113,6 +113,16 @@ button {
   border-radius: 4px;
 }
 
+.fa-arrow-up {
+  margin-top: 65px;
+}
+
+.fx > p {
+  text-align: center;
+  margin: 0 0 5px 0;
+  font-size: 14px;
+}
+
 .select {
   margin-bottom: 10px;
   margin-top: 5px;

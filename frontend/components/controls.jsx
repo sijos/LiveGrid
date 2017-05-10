@@ -138,6 +138,8 @@ class Controls extends React.Component {
         </select>
         <button onClick={this.toggleFx(fxNum)} className={`fx-${text}`}>
           {text}</button>
+        <i className="fa fa-arrow-up" />
+        <p>Turn to set dry/wet!</p>
       </section>
     );
   }
