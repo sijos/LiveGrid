@@ -26,11 +26,6 @@ class Grid extends React.Component {
     this.clearGrid = this.clearGrid.bind(this);
   }
 
-  // delete later
-  componentDidMount() {
-    console.log(this.props.part);
-  }
-
   setTile(pos, value) {
     let newGrid = this.state.grid;
     let [row, col] = pos;
