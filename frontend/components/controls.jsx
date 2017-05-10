@@ -40,7 +40,7 @@ class Controls extends React.Component {
 
     let knob1 = new Interface.Knob({ 
       bounds: [middle - 20, 0, 55, 55],
-      value: 0.5,
+      value: 0.75,
       usesRotation: true,
       centerZero: false,
       onvaluechange: () => {
@@ -50,7 +50,7 @@ class Controls extends React.Component {
 
     let knob2 = new Interface.Knob({ 
       bounds: [middle + 100, 0, 55, 55],
-      value: 0.5,
+      value: 0.75,
       usesRotation: true,
       centerZero: false,
       onvaluechange: () => {
@@ -60,7 +60,7 @@ class Controls extends React.Component {
 
     let knob3 = new Interface.Knob({ 
       bounds: [middle + 220, 0, 55, 55],
-      value: 0.5,
+      value: 0.75,
       usesRotation: true,
       centerZero: false,
       onvaluechange: () => {
