@@ -25967,34 +25967,34 @@ var synthNotes = exports.synthNotes = {
 
 var fxMap = exports.fxMap = {
   "Chorus": function Chorus() {
-    return new _tone2.default.Chorus({ "wet": 0.5 });
+    return new _tone2.default.Chorus({ "wet": 0.75 });
   },
   "Phaser": function Phaser() {
     return new _tone2.default.Phaser({
-      "wet": 0.5,
+      "wet": 0.75,
       "frequency": 0.3,
       "octaves": 4,
       "baseFrequency": 400
     });
   },
   "Reverb": function Reverb() {
-    return new _tone2.default.JCReverb(0.325, { "wet": 0.5 });
+    return new _tone2.default.JCReverb(0.325, { "wet": 0.75 });
   },
-  // "AutoWah": () => new Tone.AutoWah(50, 6, -15, { "wet": 0.5}),
+  // "AutoWah": () => new Tone.AutoWah(50, 6, -15, { "wet": 0.75}),
   "BitCrusher": function BitCrusher() {
-    return new _tone2.default.BitCrusher({ "wet": 0.5 });
+    return new _tone2.default.BitCrusher({ "wet": 0.75 });
   },
   "Chebyshev": function Chebyshev() {
-    return new _tone2.default.Chebyshev(50, { "wet": 0.5 });
+    return new _tone2.default.Chebyshev(50, { "wet": 0.75 });
   },
   "Distortion": function Distortion() {
-    return new _tone2.default.Distortion(0.5, { "wet": 0.5 });
+    return new _tone2.default.Distortion(0.5, { "wet": 0.75 });
   },
   "Freeverb": function Freeverb() {
-    return new _tone2.default.Freeverb({ "wet": 0.5 });
+    return new _tone2.default.Freeverb({ "wet": 0.75 });
   },
   "Delay": function Delay() {
-    return new _tone2.default.PingPongDelay({ "wet": 0.5 });
+    return new _tone2.default.PingPongDelay({ "wet": 0.75 });
   }
 };
 
@@ -45855,7 +45855,7 @@ var Controls = function (_React$Component) {
 
       var knob1 = new _interface2.default.Knob({
         bounds: [middle - 20, 0, 55, 55],
-        value: 0.5,
+        value: 0.75,
         usesRotation: true,
         centerZero: false,
         onvaluechange: function onvaluechange() {
@@ -45867,7 +45867,7 @@ var Controls = function (_React$Component) {
 
       var knob2 = new _interface2.default.Knob({
         bounds: [middle + 100, 0, 55, 55],
-        value: 0.5,
+        value: 0.75,
         usesRotation: true,
         centerZero: false,
         onvaluechange: function onvaluechange() {
@@ -45879,7 +45879,7 @@ var Controls = function (_React$Component) {
 
       var knob3 = new _interface2.default.Knob({
         bounds: [middle + 220, 0, 55, 55],
-        value: 0.5,
+        value: 0.75,
         usesRotation: true,
         centerZero: false,
         onvaluechange: function onvaluechange() {
@@ -45980,6 +45980,12 @@ var Controls = function (_React$Component) {
           'button',
           { onClick: this.toggleFx(fxNum), className: 'fx-' + text },
           text
+        ),
+        _react2.default.createElement('i', { className: 'fa fa-arrow-up' }),
+        _react2.default.createElement(
+          'p',
+          null,
+          'Turn to set dry/wet!'
         )
       );
     }
@@ -46105,15 +46111,7 @@ var Grid = function (_React$Component) {
     return _this;
   }
 
-  // delete later
-
-
   _createClass(Grid, [{
-    key: 'componentDidMount',
-    value: function componentDidMount() {
-      console.log(this.props.part);
-    }
-  }, {
     key: 'setTile',
     value: function setTile(pos, value) {
       var newGrid = this.state.grid;
