@@ -119,6 +119,9 @@ class Controls extends React.Component {
   setFx(fxNum) {
     let fx = this.state[fxNum];
     return (e) => {
+      if (fx.on) {
+        this.toggleFx(fxNum)();
+      }
       fx.name = e.target.value;
       fx.effect = fxMap[fx.name]();
       this.state[fxNum] = fx;
