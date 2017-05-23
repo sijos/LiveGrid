@@ -131,7 +131,6 @@ class Controls extends React.Component {
 
   renderFx(fxNum) {
     let fx = this.state[fxNum];
-    let text = fx.on ? "Off" : "On";
     return (
       <section className="fx">
         <select className="select" onChange={this.setFx(fxNum)} value={fx.name}>
@@ -139,8 +138,13 @@ class Controls extends React.Component {
             <option value={name} key={name}>{name}</option>
           ))}
         </select>
-        <button onClick={this.toggleFx(fxNum)} className={`fx-${text}`}>
-          {text}</button>
+        <label className="switch">
+          <input
+            type="checkbox"
+            checked={fx.on}
+            onChange={this.toggleFx(fxNum)}/>
+          <div className="slider round"></div>
+        </label>
         <i className="fa fa-arrow-up" />
         <p>Turn to set dry/wet!</p>
       </section>
@@ -148,7 +152,6 @@ class Controls extends React.Component {
   }
 
   render() {
-    const fx1Status = this.state.fx1.on ? "On" : "Off"
     const buttonLogo = this.state.playing ?
       <i className="fa fa-pause-circle fa-3x" /> : 
       <i className="fa fa-play-circle fa-3x" />
