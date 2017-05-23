@@ -4,9 +4,9 @@ import Interface from '../../build/interface';
 import { fxMap } from './constants';
 
 const defaultState = {
-  fx1: { on: false, name: "Chorus", effect: fxMap["Chorus"]() },
-  fx2: { on: false, name: "Phaser", effect: fxMap["Phaser"]() },
-  fx3: { on: false, name: "Reverb", effect: fxMap["Reverb"]() },
+  fx1: { on: false, name: "Delay", effect: fxMap["Delay"]() },
+  fx2: { on: false, name: "BitCrusher", effect: fxMap["BitCrusher"]() },
+  fx3: { on: false, name: "Chorus", effect: fxMap["Chorus"]() },
   bpm: 120,
   playing: true
 }
