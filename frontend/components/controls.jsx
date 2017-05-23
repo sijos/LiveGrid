@@ -29,7 +29,7 @@ class Controls extends React.Component {
 
     let slider = new Interface.Slider({
       isVertical: false,
-      bounds: [middle - 296, 18, 220, 28],
+      bounds: [middle + 220, 175, 190, 28],
       min: 80,
       max: 200,
       value: 120,
@@ -39,7 +39,7 @@ class Controls extends React.Component {
     });
 
     let knob1 = new Interface.Knob({ 
-      bounds: [middle - 20, 0, 55, 55],
+      bounds: [middle + 310, 279, 55, 55],
       value: 0.75,
       usesRotation: true,
       centerZero: false,
@@ -49,7 +49,7 @@ class Controls extends React.Component {
     });
 
     let knob2 = new Interface.Knob({ 
-      bounds: [middle + 100, 0, 55, 55],
+      bounds: [middle + 310, 402, 55, 55],
       value: 0.75,
       usesRotation: true,
       centerZero: false,
@@ -59,7 +59,7 @@ class Controls extends React.Component {
     });
 
     let knob3 = new Interface.Knob({ 
-      bounds: [middle + 220, 0, 55, 55],
+      bounds: [middle + 310, 525, 55, 55],
       value: 0.75,
       usesRotation: true,
       centerZero: false,
@@ -70,10 +70,10 @@ class Controls extends React.Component {
 
     window.addEventListener("resize", () => {
       middle = window.innerWidth / 2;
-      slider['x'] = middle - 296;
-      knob1['x'] = middle - 20;
-      knob2['x'] = middle + 100;
-      knob3['x'] = middle + 220;
+      slider['x'] = middle + 220;
+      knob1['x'] = middle + 310;
+      knob2['x'] = middle + 310;
+      knob3['x'] = middle + 310;
       panel.refresh();
     });
 
@@ -133,20 +133,25 @@ class Controls extends React.Component {
     let fx = this.state[fxNum];
     return (
       <section className="fx">
-        <select className="select" onChange={this.setFx(fxNum)} value={fx.name}>
-          {Object.keys(fxMap).map((name) => (
-            <option value={name} key={name}>{name}</option>
-          ))}
-        </select>
-        <label className="switch">
-          <input
-            type="checkbox"
-            checked={fx.on}
-            onChange={this.toggleFx(fxNum)}/>
-          <div className="slider round"></div>
-        </label>
-        <i className="fa fa-arrow-up" />
-        <p>Turn to set dry/wet!</p>
+        <section>
+          <label className="title">On/Off:</label>
+          <label className="switch">
+            <input
+              type="checkbox"
+              checked={fx.on}
+              onChange={this.toggleFx(fxNum)}/>
+            <div className="slider round"></div>
+          </label>
+        </section>
+        <section>
+          <label className="title">Pick FX:</label>
+          <select className="select" onChange={this.setFx(fxNum)} value={fx.name}>
+            {Object.keys(fxMap).map((name) => (
+              <option value={name} key={name}>{name}</option>
+            ))}
+          </select>
+        </section>
+        <p>Set dry/wet:</p>
       </section>
     );
   }
@@ -158,7 +163,8 @@ class Controls extends React.Component {
     return (
       <div className="control-panel">
         <section className="grid-control">
-          <div className="top">
+          <label className="control-label">Grid Controls</label>
+          <div className="left">
             <button className="play-pause"
                     onClick={this.play}>{buttonLogo}
             </button>
@@ -166,8 +172,10 @@ class Controls extends React.Component {
                     onClick={this.props.clearGrid}>Clear Grid
             </button>
           </div>
-          <label>Set Tempo/BPM:</label>
-          <label className="bpm">{Math.round(this.state.bpm)}</label>
+          <div className="right">
+            <label>Set Tempo/BPM:</label>
+            <label className="bpm">{Math.round(this.state.bpm)}</label>
+          </div>
         </section>
         {this.renderFx("fx1")}
         {this.renderFx("fx2")}

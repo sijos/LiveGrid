@@ -24,7 +24,7 @@ ul {
   list-style: none;
 }
 
-body, .grid-box, .main-content, .top {
+body, .grid-box, .main-content {
   display: flex;
   align-items: center;
 }
@@ -61,9 +61,8 @@ button {
   text-align: center;
 }
 
-.main-content {
-  width: 600px;
-  flex-direction: column;
+.grid-box *, .switch, button, select {
+  z-index: 25;
 }
 
 .grid-box {
@@ -78,59 +77,78 @@ button {
 .control-panel {
   display: flex;
   justify-content: space-between;
-  margin-top: 30px;
-  width: 600px;
+  flex-direction: column;
+  margin-left: 40px;
+  align-items: center;
+  height: 480px;
 }
 
 .grid-control {
   /*background: url('../../images/metal.jpg')*/
-  width: 240px;
+  width: 340px;
   border: 1px solid gray;
   border-radius: 4px;
-  height: 130px;
+  height: 110px;
   display: flex;
-  flex-direction: column;
   align-items: center;
+  justify-content: space-around;
 }
+
+.control-label {
+  position: absolute;
+  margin-top: -45px;
+}
+
+.left, .right {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.right {
+  margin-top: 13px;
+}
+
 
 .play-pause {
   border: none;
-  margin-right: 40px;
 }
 
 .bpm {
   z-index: 10;
-  margin-top: 16px;
+  margin-top: 22px;
 }
 
 .fx {
-  width: 90px;
+  width: 250px;
   display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
+  justify-content: space-around;
   align-items: center;
   border: 1px solid gray;
   border-radius: 4px;
+  padding: 8px;
+  height: 65px;
 }
 
-.fa-arrow-up {
-  margin-top: 65px;
+.fx > section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .fx > p {
   text-align: center;
-  margin: 0 0 5px 0;
+  margin: -60px 0 0 0;
   font-size: 14px;
+}
+
+.title {
+  margin-bottom: 5px;
 }
 
 .select {
   margin-bottom: 10px;
   margin-top: 5px;
-  color: black;
-}
-
-.fx-Off {
-  background-color: white;
   color: black;
 }
 

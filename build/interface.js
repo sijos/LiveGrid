@@ -218,8 +218,8 @@ Interface.Panel = function() {
           margin:0,
           padding:0,
           position:'absolute',
-          left:0,
-          top:685
+          left: 0,
+          top:0
         });
         
         $('body').append(d);
