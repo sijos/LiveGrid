@@ -32469,7 +32469,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 									padding: 0,
 									position: 'absolute',
 									left: 0,
-									top: 685
+									top: 0
 								});
 
 								$('body').append(d);
@@ -45807,9 +45807,9 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 var defaultState = {
-  fx1: { on: false, name: "Chorus", effect: _constants.fxMap["Chorus"]() },
-  fx2: { on: false, name: "Phaser", effect: _constants.fxMap["Phaser"]() },
-  fx3: { on: false, name: "Reverb", effect: _constants.fxMap["Reverb"]() },
+  fx1: { on: false, name: "Delay", effect: _constants.fxMap["Delay"]() },
+  fx2: { on: false, name: "BitCrusher", effect: _constants.fxMap["BitCrusher"]() },
+  fx3: { on: false, name: "Chorus", effect: _constants.fxMap["Chorus"]() },
   bpm: 120,
   playing: true
 };
@@ -45842,7 +45842,7 @@ var Controls = function (_React$Component) {
 
       var slider = new _interface2.default.Slider({
         isVertical: false,
-        bounds: [middle - 296, 18, 220, 28],
+        bounds: [middle + 220, 175, 190, 28],
         min: 80,
         max: 200,
         value: 120,
@@ -45854,7 +45854,7 @@ var Controls = function (_React$Component) {
       });
 
       var knob1 = new _interface2.default.Knob({
-        bounds: [middle - 20, 0, 55, 55],
+        bounds: [middle + 310, 279, 55, 55],
         value: 0.75,
         usesRotation: true,
         centerZero: false,
@@ -45866,7 +45866,7 @@ var Controls = function (_React$Component) {
       });
 
       var knob2 = new _interface2.default.Knob({
-        bounds: [middle + 100, 0, 55, 55],
+        bounds: [middle + 310, 402, 55, 55],
         value: 0.75,
         usesRotation: true,
         centerZero: false,
@@ -45878,7 +45878,7 @@ var Controls = function (_React$Component) {
       });
 
       var knob3 = new _interface2.default.Knob({
-        bounds: [middle + 220, 0, 55, 55],
+        bounds: [middle + 310, 525, 55, 55],
         value: 0.75,
         usesRotation: true,
         centerZero: false,
@@ -45891,10 +45891,10 @@ var Controls = function (_React$Component) {
 
       window.addEventListener("resize", function () {
         middle = window.innerWidth / 2;
-        slider['x'] = middle - 296;
-        knob1['x'] = middle - 20;
-        knob2['x'] = middle + 100;
-        knob3['x'] = middle + 220;
+        slider['x'] = middle + 220;
+        knob1['x'] = middle + 310;
+        knob2['x'] = middle + 310;
+        knob3['x'] = middle + 310;
         panel.refresh();
       });
 
@@ -45951,6 +45951,9 @@ var Controls = function (_React$Component) {
 
       var fx = this.state[fxNum];
       return function (e) {
+        if (fx.on) {
+          _this4.toggleFx(fxNum)();
+        }
         fx.name = e.target.value;
         fx.effect = _constants.fxMap[fx.name]();
         _this4.state[fxNum] = fx;
@@ -45961,38 +45964,57 @@ var Controls = function (_React$Component) {
     key: 'renderFx',
     value: function renderFx(fxNum) {
       var fx = this.state[fxNum];
-      var text = fx.on ? "Off" : "On";
       return _react2.default.createElement(
         'section',
         { className: 'fx' },
         _react2.default.createElement(
-          'select',
-          { className: 'select', onChange: this.setFx(fxNum), value: fx.name },
-          Object.keys(_constants.fxMap).map(function (name) {
-            return _react2.default.createElement(
-              'option',
-              { value: name, key: name },
-              name
-            );
-          })
+          'section',
+          null,
+          _react2.default.createElement(
+            'label',
+            { className: 'title' },
+            'On/Off:'
+          ),
+          _react2.default.createElement(
+            'label',
+            { className: 'switch' },
+            _react2.default.createElement('input', {
+              type: 'checkbox',
+              checked: fx.on,
+              onChange: this.toggleFx(fxNum) }),
+            _react2.default.createElement('div', { className: 'slider round' })
+          )
         ),
         _react2.default.createElement(
-          'button',
-          { onClick: this.toggleFx(fxNum), className: 'fx-' + text },
-          text
+          'section',
+          null,
+          _react2.default.createElement(
+            'label',
+            { className: 'title' },
+            'Pick FX:'
+          ),
+          _react2.default.createElement(
+            'select',
+            { className: 'select', onChange: this.setFx(fxNum), value: fx.name },
+            Object.keys(_constants.fxMap).map(function (name) {
+              return _react2.default.createElement(
+                'option',
+                { value: name, key: name },
+                name
+              );
+            })
+          )
         ),
-        _react2.default.createElement('i', { className: 'fa fa-arrow-up' }),
         _react2.default.createElement(
           'p',
           null,
-          'Turn to set dry/wet!'
+          'Set dry/wet:'
         )
       );
     }
   }, {
     key: 'render',
     value: function render() {
-      var fx1Status = this.state.fx1.on ? "On" : "Off";
       var buttonLogo = this.state.playing ? _react2.default.createElement('i', { className: 'fa fa-pause-circle fa-3x' }) : _react2.default.createElement('i', { className: 'fa fa-play-circle fa-3x' });
       return _react2.default.createElement(
         'div',
@@ -46001,8 +46023,13 @@ var Controls = function (_React$Component) {
           'section',
           { className: 'grid-control' },
           _react2.default.createElement(
+            'label',
+            { className: 'control-label' },
+            'Grid Controls'
+          ),
+          _react2.default.createElement(
             'div',
-            { className: 'top' },
+            { className: 'left' },
             _react2.default.createElement(
               'button',
               { className: 'play-pause',
@@ -46017,14 +46044,18 @@ var Controls = function (_React$Component) {
             )
           ),
           _react2.default.createElement(
-            'label',
-            null,
-            'Set Tempo/BPM:'
-          ),
-          _react2.default.createElement(
-            'label',
-            { className: 'bpm' },
-            Math.round(this.state.bpm)
+            'div',
+            { className: 'right' },
+            _react2.default.createElement(
+              'label',
+              null,
+              'Set Tempo/BPM:'
+            ),
+            _react2.default.createElement(
+              'label',
+              { className: 'bpm' },
+              Math.round(this.state.bpm)
+            )
           )
         ),
         this.renderFx("fx1"),
