@@ -3,7 +3,7 @@ import Tile from './tile';
 import Controls from './controls';
 import Column from './column';
 import Tone from 'tone';
-import { timeStarts, synthNotes } from './constants';
+import { timeStarts, synthNotes, tetraChords } from './constants';
 
 const defaultGrid = () => {
   let result = [];
@@ -36,7 +36,7 @@ class Grid extends React.Component {
   toggleTile(pos) {
     let [row, col] = pos;
     let newVal = !this.state.grid[row][col];
-    const note = synthNotes[row];
+    const note = tetraChords[row];
     const time = timeStarts[col];
     if (newVal) {
       this.props.part.add(time, note);

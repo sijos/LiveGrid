@@ -39,6 +39,25 @@ export const synthNotes = {
   15: "C3"
 };
 
+export const tetraChords = {
+  0: "A6",
+  1: "Bb6",
+  2: "C5",
+  3: "B5",
+  4: "Bb5",
+  5: "A5",
+  6: "A4",
+  7: "C4",
+  8: "B4",
+  9: "D4",
+  10: "Ab3",
+  11: "Eb3",
+  12: "F3",
+  13: "Db3",
+  14: "G3",
+  15: "F3"
+};
+
 export const fxMap = {
   "Chorus": () => new Tone.Chorus({ "wet": 0.75 }),
   "Phaser": () => new Tone.Phaser({ 
