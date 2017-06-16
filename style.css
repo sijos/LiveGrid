@@ -152,6 +152,10 @@ button {
   color: black;
 }
 
+.note-select {
+  display: flex;
+}
+
 .grid-col {
   display: flex;
   flex-direction: column;
