@@ -67,7 +67,6 @@ class Grid extends React.Component {
   setNotes(e) {
     const synthNotes = noteSets[e.target.value];
     this.clearGrid();
-    console.log(synthNotes);
     this.setState({ synthNotes });
   }
 
