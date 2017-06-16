@@ -3,7 +3,7 @@ import Tile from './tile';
 import Controls from './controls';
 import Column from './column';
 import Tone from 'tone';
-import { timeStarts, synthNotes, tetraChords } from './constants';
+import { timeStarts, noteSets } from './constants';
 
 const defaultGrid = () => {
   let result = [];
@@ -17,13 +17,18 @@ const defaultGrid = () => {
   return result;
 };
 
+
 class Grid extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { grid: defaultGrid() };
+    this.state = { 
+      grid: defaultGrid(),
+      synthNotes: noteSets['Pentatonic']
+    };
     this.setTile = this.setTile.bind(this);
     this.toggleTile = this.toggleTile.bind(this);
     this.clearGrid = this.clearGrid.bind(this);
+    this.setNotes = this.setNotes.bind(this);
   }
 
   setTile(pos, value) {
@@ -36,7 +41,7 @@ class Grid extends React.Component {
   toggleTile(pos) {
     let [row, col] = pos;
     let newVal = !this.state.grid[row][col];
-    const note = tetraChords[row];
+    const note = this.state.synthNotes[row];
     const time = timeStarts[col];
     if (newVal) {
       this.props.part.add(time, note);
@@ -59,14 +64,24 @@ class Grid extends React.Component {
     this.props.part.removeAll();
   }
 
+  setNotes(e) {
+    const synthNotes = noteSets[e.target.value];
+    this.clearGrid();
+    console.log(synthNotes);
+    this.setState({ synthNotes });
+  }
+
   render() {
     const rows = Array.from(Array(16).keys());
     const grid = rows.map(colId => this.renderCol(colId));
     return(
       <div className="main-content">
         <div className="grid-box">{grid}</div>
-        <Controls clearGrid={this.clearGrid} 
-          synth={this.props.synth} part={this.props.part}/>
+        <Controls 
+          clearGrid={this.clearGrid}
+          setNotes={this.setNotes}
+          synth={this.props.synth}
+          part={this.props.part}/>
       </div>
     );
   }

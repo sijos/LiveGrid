@@ -1,7 +1,7 @@
 import React from 'react';
 import Tone from 'tone';
 import Interface from '../../build/interface';
-import { fxMap } from './constants';
+import { fxMap, noteSets } from './constants';
 
 const defaultState = {
   fx1: { on: false, name: "Delay", effect: fxMap["Delay"]() },
@@ -9,7 +9,7 @@ const defaultState = {
   fx3: { on: false, name: "Chorus", effect: fxMap["Chorus"]() },
   bpm: 120,
   playing: true
-}
+};
 
 class Controls extends React.Component {
   constructor(props) {
@@ -162,6 +162,13 @@ class Controls extends React.Component {
       <i className="fa fa-play-circle fa-3x" />
     return (
       <div className="control-panel">
+        <section className="note-select">
+          <select className="select" onChange={this.props.setNotes}>
+            {Object.keys(noteSets).map((set) => (
+              <option value={set} key={set}>{set}</option>
+            ))}
+          </select>
+        </section>
         <section className="grid-control">
           <label className="control-label">Grid Controls</label>
           <div className="left">
