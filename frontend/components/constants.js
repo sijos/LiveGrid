@@ -20,7 +20,7 @@ export const timeStarts = {
 };
 
 //pentatonic
-export const synthNotes = {
+export const pentatonic = {
   0: "C6",
   1: "A5",
   2: "G5",
@@ -39,6 +39,7 @@ export const synthNotes = {
   15: "C3"
 };
 
+//tetrachords
 export const tetraChords = {
   0: "A6",
   1: "Bb6",
@@ -56,6 +57,11 @@ export const tetraChords = {
   13: "Db3",
   14: "G3",
   15: "F3"
+};
+
+export const noteSets = {
+  Pentatonic: pentatonic,
+  Tetrachords: tetraChords
 };
 
 export const fxMap = {
