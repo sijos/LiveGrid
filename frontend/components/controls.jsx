@@ -29,7 +29,7 @@ class Controls extends React.Component {
 
     let slider = new Interface.Slider({
       isVertical: false,
-      bounds: [middle + 220, 175, 190, 28],
+      bounds: [middle + 220, 174, 190, 28],
       min: 80,
       max: 200,
       value: 120,
@@ -39,7 +39,7 @@ class Controls extends React.Component {
     });
 
     let knob1 = new Interface.Knob({ 
-      bounds: [middle + 310, 279, 55, 55],
+      bounds: [middle + 310, 320, 55, 55],
       value: 0.75,
       usesRotation: true,
       centerZero: false,
@@ -49,7 +49,7 @@ class Controls extends React.Component {
     });
 
     let knob2 = new Interface.Knob({ 
-      bounds: [middle + 310, 402, 55, 55],
+      bounds: [middle + 310, 421, 55, 55],
       value: 0.75,
       usesRotation: true,
       centerZero: false,
@@ -162,13 +162,6 @@ class Controls extends React.Component {
       <i className="fa fa-play-circle fa-3x" />
     return (
       <div className="control-panel">
-        <section className="note-select">
-          <select className="select" onChange={this.props.setNotes}>
-            {Object.keys(noteSets).map((set) => (
-              <option value={set} key={set}>{set}</option>
-            ))}
-          </select>
-        </section>
         <section className="grid-control">
           <label className="control-label">Grid Controls</label>
           <div className="left">
@@ -183,6 +176,14 @@ class Controls extends React.Component {
             <label>Set Tempo/BPM:</label>
             <label className="bpm">{Math.round(this.state.bpm)}</label>
           </div>
+        </section>
+        <section className="note-select">
+          <label>Choose scale type:</label>
+          <select className="notes" onChange={this.props.setNotes}>
+            {Object.keys(noteSets).map((set) => (
+              <option value={set} key={set}>{set}</option>
+            ))}
+          </select>
         </section>
         {this.renderFx("fx1")}
         {this.renderFx("fx2")}
