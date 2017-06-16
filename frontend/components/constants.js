@@ -20,7 +20,7 @@ export const timeStarts = {
 };
 
 //pentatonic
-export const pentatonic = {
+const pentatonic = {
   0: "C6",
   1: "A5",
   2: "G5",
@@ -40,7 +40,7 @@ export const pentatonic = {
 };
 
 //tetrachords
-export const tetraChords = {
+const tetraChords = {
   0: "A6",
   1: "Bb6",
   2: "C5",
@@ -59,9 +59,69 @@ export const tetraChords = {
   15: "F3"
 };
 
+const triChords = {
+  0: "G6",
+  1: "F6",
+  2: "E6",
+  3: "C#6",
+  4: "G5",
+  5: "F#5",
+  6: "B5",
+  7: "Bb4",
+  8: "A4",
+  9: "G#4",
+  10: "Eb3",
+  11: "D3",
+  12: "C3",
+  13: "F2",
+  14: "E2",
+  15: "C#2"
+};
+
+const octaveJumper = {
+  0: "A5",
+  1: "A4",
+  2: "A3",
+  3: "E5",
+  4: "E4",
+  5: "E3",
+  6: "F5",
+  7: "F4",
+  8: "F3",
+  9: "G5",
+  10: "G4",
+  11: "G3",
+  12: "C5",
+  13: "C4",
+  14: "C3",
+  15: "C2"
+};
+
+const dreamy = {
+  0: "A5",
+  1: "E5",
+  2: "D5",
+  3: "C5",
+  4: "A#5",
+  5: "G#4",
+  6: "F#4",
+  7: "E4",
+  8: "D4",
+  9: "C4",
+  10: "A#4",
+  11: "G#3",
+  12: "F#3",
+  13: "E3",
+  14: "D3",
+  15: "C3"
+};
+
 export const noteSets = {
   Pentatonic: pentatonic,
-  Tetrachords: tetraChords
+  Tetrachords: tetraChords,
+  Trichords: triChords,
+  OctaveJumper: octaveJumper,
+  Dreamy: dreamy
 };
 
 export const fxMap = {
