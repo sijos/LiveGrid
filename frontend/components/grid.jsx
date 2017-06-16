@@ -9,9 +9,7 @@ const defaultGrid = () => {
   let result = [];
   for (let i = 0; i < 16; i++) {
     let row = [];
-    for (let j = 0; j < 16; j++) {
-      row.push(false);
-    }
+    for (let j = 0; j < 16; j++) { row.push(false); }
     result.push(row);
   }
   return result;
