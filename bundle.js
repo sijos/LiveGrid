@@ -25918,7 +25918,7 @@ module.exports = SyntheticUIEvent;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.fxMap = exports.synthNotes = exports.timeStarts = undefined;
+exports.fxMap = exports.noteSets = exports.timeStarts = undefined;
 
 var _tone = __webpack_require__(21);
 
@@ -25946,7 +25946,7 @@ var timeStarts = exports.timeStarts = {
 };
 
 //pentatonic
-var synthNotes = exports.synthNotes = {
+var pentatonic = {
   0: "C6",
   1: "A5",
   2: "G5",
@@ -25963,6 +25963,91 @@ var synthNotes = exports.synthNotes = {
   13: "E3",
   14: "D3",
   15: "C3"
+};
+
+//tetrachords
+var tetraChords = {
+  0: "A6",
+  1: "Bb6",
+  2: "C5",
+  3: "B5",
+  4: "Bb5",
+  5: "A5",
+  6: "A4",
+  7: "C4",
+  8: "B4",
+  9: "D4",
+  10: "Ab3",
+  11: "Eb3",
+  12: "F3",
+  13: "Db3",
+  14: "G3",
+  15: "F3"
+};
+
+var triChords = {
+  0: "G6",
+  1: "F6",
+  2: "E6",
+  3: "C#6",
+  4: "G5",
+  5: "F#5",
+  6: "B5",
+  7: "Bb4",
+  8: "A4",
+  9: "G#4",
+  10: "Eb3",
+  11: "D3",
+  12: "C3",
+  13: "F2",
+  14: "E2",
+  15: "C#2"
+};
+
+var octaveJumper = {
+  0: "A5",
+  1: "A4",
+  2: "A3",
+  3: "E5",
+  4: "E4",
+  5: "E3",
+  6: "F5",
+  7: "F4",
+  8: "F3",
+  9: "G5",
+  10: "G4",
+  11: "G3",
+  12: "C5",
+  13: "C4",
+  14: "C3",
+  15: "C2"
+};
+
+var dreamy = {
+  0: "A5",
+  1: "E5",
+  2: "D5",
+  3: "C5",
+  4: "A#5",
+  5: "G#4",
+  6: "F#4",
+  7: "E4",
+  8: "D4",
+  9: "C4",
+  10: "A#4",
+  11: "G#3",
+  12: "F#3",
+  13: "E3",
+  14: "D3",
+  15: "C3"
+};
+
+var noteSets = exports.noteSets = {
+  Pentatonic: pentatonic,
+  Tetrachords: tetraChords,
+  Trichords: triChords,
+  OctaveJumper: octaveJumper,
+  Dreamy: dreamy
 };
 
 var fxMap = exports.fxMap = {
@@ -45842,7 +45927,7 @@ var Controls = function (_React$Component) {
 
       var slider = new _interface2.default.Slider({
         isVertical: false,
-        bounds: [middle + 220, 175, 190, 28],
+        bounds: [middle + 220, 174, 190, 28],
         min: 80,
         max: 200,
         value: 120,
@@ -45854,7 +45939,7 @@ var Controls = function (_React$Component) {
       });
 
       var knob1 = new _interface2.default.Knob({
-        bounds: [middle + 310, 279, 55, 55],
+        bounds: [middle + 310, 320, 55, 55],
         value: 0.75,
         usesRotation: true,
         centerZero: false,
@@ -45866,7 +45951,7 @@ var Controls = function (_React$Component) {
       });
 
       var knob2 = new _interface2.default.Knob({
-        bounds: [middle + 310, 402, 55, 55],
+        bounds: [middle + 310, 421, 55, 55],
         value: 0.75,
         usesRotation: true,
         centerZero: false,
@@ -46058,6 +46143,26 @@ var Controls = function (_React$Component) {
             )
           )
         ),
+        _react2.default.createElement(
+          'section',
+          { className: 'note-select' },
+          _react2.default.createElement(
+            'label',
+            null,
+            'Choose scale type:'
+          ),
+          _react2.default.createElement(
+            'select',
+            { className: 'notes', onChange: this.props.setNotes },
+            Object.keys(_constants.noteSets).map(function (set) {
+              return _react2.default.createElement(
+                'option',
+                { value: set, key: set },
+                set
+              );
+            })
+          )
+        ),
         this.renderFx("fx1"),
         this.renderFx("fx2"),
         this.renderFx("fx3")
@@ -46135,10 +46240,14 @@ var Grid = function (_React$Component) {
 
     var _this = _possibleConstructorReturn(this, (Grid.__proto__ || Object.getPrototypeOf(Grid)).call(this, props));
 
-    _this.state = { grid: defaultGrid() };
+    _this.state = {
+      grid: defaultGrid(),
+      synthNotes: _constants.noteSets['Pentatonic']
+    };
     _this.setTile = _this.setTile.bind(_this);
     _this.toggleTile = _this.toggleTile.bind(_this);
     _this.clearGrid = _this.clearGrid.bind(_this);
+    _this.setNotes = _this.setNotes.bind(_this);
     return _this;
   }
 
@@ -46162,7 +46271,7 @@ var Grid = function (_React$Component) {
           col = _pos2[1];
 
       var newVal = !this.state.grid[row][col];
-      var note = _constants.synthNotes[row];
+      var note = this.state.synthNotes[row];
       var time = _constants.timeStarts[col];
       if (newVal) {
         this.props.part.add(time, note);
@@ -46187,6 +46296,13 @@ var Grid = function (_React$Component) {
       this.props.part.removeAll();
     }
   }, {
+    key: 'setNotes',
+    value: function setNotes(e) {
+      var synthNotes = _constants.noteSets[e.target.value];
+      this.clearGrid();
+      this.setState({ synthNotes: synthNotes });
+    }
+  }, {
     key: 'render',
     value: function render() {
       var _this2 = this;
@@ -46203,8 +46319,11 @@ var Grid = function (_React$Component) {
           { className: 'grid-box' },
           grid
         ),
-        _react2.default.createElement(_controls2.default, { clearGrid: this.clearGrid,
-          synth: this.props.synth, part: this.props.part })
+        _react2.default.createElement(_controls2.default, {
+          clearGrid: this.clearGrid,
+          setNotes: this.setNotes,
+          synth: this.props.synth,
+          part: this.props.part })
       );
     }
   }]);
